@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SahirinCare - Layanan Pijat Terapis Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css"/>
+</head>
+<body class="text-gray-800 bg-white">
+
+<div class="fixed top-4 right-4 z-50 bg-white rounded-md shadow-lg px-4 py-2 text-sm">
+  <label for="language-select" class="mr-2 font-semibold text-gray-700">🌐 Bahasa:</label>
+  <select id="language-select" onchange="translateLanguage(this.value)" class="border border-gray-300 rounded-md px-2 py-1">
+    <option value="id">🇮🇩 Indonesia</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 Arabic</option>
+    <option value="ja">🇯🇵 Japanese</option>
+    <option value="fr">🇫🇷 French</option>
+    <option value="de">🇩🇪 German</option>
+    <option value="zh-CN">🇨🇳 Chinese</option>
+    <option value="ko">🇰🇷 Korean</option>
+    <option value="hi">🇮🇳 Hindi</option>
+  </select>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
+
+<div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;">
+    <img src="https://placehold.co/200x200/4CAF50/ffffff?text=SahirinCare" alt="SahirinCare Logo" style="animation: bounce 1s infinite;">
+</div>
+<div id="scroll-progress" style="position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: #4CAF50; z-index: 9999; transition: width 0.25s ease;"></div>
+
+<nav class="bg-white shadow-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-20">
+    <div class="flex items-center">
+        <span class="font-semibold text-gray-800 text-2xl">Sahirin<span class="text-green-600">Care</span></span>
+    </div>
+    
+<!-- Navigasi Desktop -->
+
+<!-- Navigasi Desktop -->
+
+<!-- Navigasi Desktop -->
+<div class="hidden md:flex items-center space-x-8">
+    <a class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition" href="#contact">Booking</a>
+    <!-- Hamburger Dropdown -->
+    <div class="relative group">
+      <button id="hamburger-toggle" class="text-gray-700 hover:text-green-600 text-2xl focus:outline-none">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div id="hamburger-menu" class="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-50 hidden p-4 text-sm text-gray-700 transition-all duration-300 ease-out">
+        <a class="block py-1 hover:text-green-600" href="#home">Beranda</a>
+        <a class="block py-1 hover:text-green-600" href="#about">Tentang</a>
+        <a class="block py-1 hover:text-green-600" href="#about-us">About Us</a>
+        <a class="block py-1 hover:text-green-600" href="#services">Layanan</a>
+        <a class="block py-1 hover:text-green-600" href="#keunggulan">Keunggulan</a>
+        <a class="block py-1 hover:text-green-600" href="#testimoni">Testimoni</a>
+        <a class="block py-1 hover:text-green-600" href="#faq">FAQ</a>
+        <a class="block py-1 hover:text-green-600" href="#blog">Tips Sehat</a>
+        <hr class="my-2">
+        <a class="block py-1 hover:text-green-600 font-semibold" href="#admin-login">Admin & Informasi Sistem</a>
+      </div>
+    </div>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">
+        <input type="checkbox" id="darkToggleDesktop" class="hidden">
+        <label for="darkToggleDesktop" class="toggle-label">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <span class="ball"></span>
+        </label>
+    </div>
+</div>
+</div>
+    <div class="md:hidden flex items-center">
+        <button class="outline-none" id="mobile-menu-button">
+            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+        </button>
+    </div>
+</div>
+</div>
+<div class="mobile-menu md:hidden bg-white shadow-lg" id="mobile-menu">
+    <div class="px-2 pt-2 pb-4 space-y-1">
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#home">Beranda</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#about">Tentang</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#services">Layanan</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#keunggulan">Keunggulan</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#testimoni">Testimoni</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#faq">FAQ</a> <!-- Added FAQ to mobile nav -->
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#blog">Tips Sehat</a>
+        <a class="block px-3 py-2 rounded-md text-base font-medium text-white bg-green-600 hover:bg-green-700" href="#contact">Booking</a>
+        <div class="flex items-center justify-between px-3 py-4">
+            <span class="text-base font-medium text-gray-700">Mode Gelap</span>
+            <div class="dark-mode-toggle">
+                <input type="checkbox" id="darkToggleMobile" class="hidden">
+                <label for="darkToggleMobile" class="toggle-label">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                    <span class="ball"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+</nav>
+
+<section class="hero-image flex items-center" data-aos="fade-up" id="home">
+<div class="container mx-auto px-6 text-center">
+<h1 class="text-4xl md:text-6xl font-bold text-white mb-4">Sahirin<span class="text-green-400">Care</span></h1>
+<p class="text-xl md:text-2xl text-white mb-8">Layanan Pijat Terapis Profesional</p>
+<p class="text-lg text-gray-100 mb-10 max-w-3xl mx-auto">Hadir untuk memberikan solusi terapi tubuh alami, aman, dan terpercaya langsung ke rumah Anda di Bekasi dan sekitarnya.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<a class="whatsapp-btn inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full text-lg" href="https://wa.me/6287808788589" target="_blank">
+<i class="fab fa-whatsapp mr-2"></i> Pesan via WhatsApp
+                </a>
+<a class="inline-flex items-center justify-center bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-semibold py-3 px-8 rounded-full text-lg" href="#services">
+<i class="fas fa-spa mr-2"></i> Lihat Layanan
+                </a>
+</div>
+</div>
+</section>
+<section class="py-20 bg-gray-50" data-aos="fade-up" id="about">
+<div class="container mx-auto px-6">
+<div class="flex flex-col lg:flex-row items-center">
+<div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+<img alt="Bapak Sahirin, terapis profesional" class="rounded-lg shadow-lg w-full" loading="lazy" src="https://placehold.co/600x400/4CAF50/ffffff?text=Bapak+Sahirin+Terapis"/>
+</div>
+<div class="lg:w-1/2">
+<h2 class="text-3xl font-bold mb-6 text-gray-800">Tentang SahirinCare</h2>
+<p class="text-gray-600 mb-4">SahirinCare adalah layanan pijat terapis &amp; pijat refleksi profesional yang beroperasi secara fleksibel dengan sistem panggilan ke rumah.</p>
+<p class="text-600 mb-6">Bisnis ini dirintis dan dijalankan oleh Bapak Sahirin, seorang terapis berpengalaman lebih dari 20 tahun yang telah membantu ratusan pelanggan merasakan kembali kenyamanan tubuh dan ketenangan pikiran.</p>
+<div class="mb-8">
+<h3 class="text-xl font-semibold mb-3 text-green-600">Visi Kami</h3>
+<p class="text-gray-600">Menjadi layanan terapis terpercaya yang memberikan solusi nyaman untuk kesehatan tubuh dan pikiran melalui sentuhan tangan ahli.</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-white p-4 rounded-lg shadow-sm">
+<div class="text-green-600 text-2xl mb-2">
+<i class="fas fa-user-check"></i>
+</div>
+<h4 class="font-semibold">20+ Tahun Pengalaman</h4>
+<p class="text-sm text-gray-600">Pengalaman luas dalam terapis tradisional</p>
+</div>
+<div class="bg-white p-4 rounded-lg shadow-sm">
+<div class="text-green-600 text-2xl mb-2">
+<i class="fas fa-home"></i>
+</div>
+<h4 class="font-semibold">Layanan Ke Rumah</h4>
+<p class="text-sm text-gray-600">Area Bekasi dan sekitarnya</p>
+</div>
+</div>
+<a class="whatsapp-btn inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full" href="https://wa.me/6287808788589" target="_blank">
+<i class="fab fa-whatsapp mr-2"></i> Hubungi Kami
+                    </a>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 bg-white" id="about-us" data-aos="fade-up">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4 text-gray-800">About Us</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        SahirinCare didirikan oleh Bapak Sahirin, seorang terapis berpengalaman lebih dari 20 tahun yang memiliki komitmen dalam memberikan pelayanan pijat profesional, aman, dan terpercaya langsung ke rumah Anda. 
+        Kami percaya bahwa kesehatan adalah investasi jangka panjang, dan melalui terapi pijat yang tepat, pelanggan dapat merasakan manfaat fisik dan mental secara menyeluruh.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+        <i class="fas fa-heartbeat text-green-600 text-3xl mb-4"></i>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Misi Kami</h3>
+        <p class="text-gray-600">Memberikan kenyamanan dan kesehatan terbaik melalui terapi pijat tradisional yang personal dan berpengalaman.</p>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+        <i class="fas fa-hand-holding-heart text-green-600 text-3xl mb-4"></i>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Nilai Kami</h3>
+        <p class="text-gray-600">Empati, profesionalisme, kepercayaan, dan pelayanan yang ramah adalah fondasi dari semua layanan kami.</p>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+        <i class="fas fa-users text-green-600 text-3xl mb-4"></i>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Komitmen</h3>
+        <p class="text-gray-600">Kami berkomitmen penuh terhadap kualitas layanan dan privasi pelanggan dalam setiap sesi terapi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-white" data-aos="fade-up" id="services">
+<div class="container mx-auto px-6">
+<div class="text-center mb-10">
+<h2 class="text-3xl font-bold mb-4 text-gray-800">Layanan Kami</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Berbagai jenis terapis yang kami tawarkan untuk membantu Anda mendapatkan tubuh yang lebih sehat dan rileks.</p>
+</div>
+
+<!-- Service Filter Buttons -->
+<div class="flex flex-wrap justify-center gap-4 mb-12" id="service-filters">
+    <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 transition active" data-filter="all">Semua</button>
+    <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 transition" data-filter="terapis">Pijat Terapis</button>
+    <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 transition" data-filter="refleksi">Pijat Refleksi</button>
+    <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 transition" data-filter="anak">Pijat Anak</button>
+    <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 transition" data-filter="lainnya">Lainnya</button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="service-list">
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="terapis">
+<img alt="Pijat Terapis" class="w-full h-48 object-cover" loading="lazy" src="https://placehold.co/600x400/4CAF50/ffffff?text=Pijat+Terapis"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Pijat Terapis</h3>
+<p class="text-gray-600 mb-4 flex-grow">Pijat seluruh tubuh dengan teknik khas untuk melancarkan peredaran darah, mengurangi pegal, dan merilekskan otot tegang.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 80.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="refleksi">
+<img alt="Pijat Refleksi" class="w-full h-48 object-cover" loading="lazy" src="https://placehold.co/600x400/4CAF50/ffffff?text=Pijat+Refleksi"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Pijat Refleksi</h3>
+<p class="text-gray-600 mb-4 flex-grow">Pijat titik refleksi di kaki dan tangan untuk melancarkan energi, mengurangi stres, dan menyeimbangkan fungsi organ.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 80.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="lainnya">
+<img alt="Pijat ke Rumah" class="w-full h-48 object-cover" loading="lazy" src="https://placehold.co/600x400/4CAF50/ffffff?text=Pijat+Ke+Rumah"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Pijat ke Rumah</h3>
+<p class="text-gray-600 mb-4 flex-grow">Layanan panggilan ke rumah di area Bekasi dan sekitarnya, memberikan kenyamanan maksimal tanpa perlu keluar rumah.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 100.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="lainnya">
+<img alt="Pijat Masuk Angin" class="w-full h-48 object-cover" loading="lazy" src="https://placehold.co/600x400/4CAF50/ffffff?text=Pijat+Masuk+Angin"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Pijat Masuk Angin</h3>
+<p class="text-gray-600 mb-4 flex-grow">Mengatasi meriang atau tidak enak badan dengan pijat ringan dan kerokan tradisional untuk membuat badan kembali lega.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 80.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="terapis">
+<img alt="Terapis Nyeri Punggung" class="w-full h-48 object-cover" loading="lazy" src="https://placehold.co/600x400/4CAF50/ffffff?text=Terapis+Nyeri+Punggung"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Terapis Nyeri Punggung</h3>
+<p class="text-gray-600 mb-4 flex-grow">Pijat fokus pada punggung bawah atau pinggang yang tegang karena duduk terlalu lama atau aktivitas berat.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 80.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="anak">
+<img alt="Pijat Anak" class="w-full h-48 object-cover" loading="lazy" src="https://placehold.co/600x400/4CAF50/ffffff?text=Pijat+Anak"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Pijat Anak-Anak</h3>
+<p class="text-gray-600 mb-4 flex-grow">Paket khusus untuk anak (minimal 4 tahun) dengan harga spesial untuk menjaga kesehatan dan kenyamanan si kecil.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 50.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-green-50" data-aos="fade-up" id="keunggulan">
+<div class="container mx-auto px-6">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold mb-4 text-gray-800">Keunggulan SahirinCare</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Alasan mengapa pelanggan memilih dan mempercayai layanan kami.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">✨</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Berpengalaman</h3>
+<p class="text-gray-600 flex-grow">Lebih dari 20 tahun pengalaman dengan teknik pijat yang tepat, aman, dan efektif.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">⏱️</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Layanan Fleksibel</h3>
+<p class="text-gray-600 flex-grow">Pemesanan praktis via WhatsApp untuk layanan panggilan atau kunjungan langsung.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">🏡</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Panggilan ke Rumah</h3>
+<p class="text-gray-600 flex-grow">Home service profesional, tepat waktu, dan mematuhi protokol kesehatan.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">👍</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Privasi Terjaga</h3>
+<p class="text-gray-600 flex-grow">Terapis kami beretika dan berkomitmen penuh menjaga privasi serta kenyamanan Anda.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">💰</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Harga Terjangkau</h3>
+<p class="text-gray-600 flex-grow">Kualitas layanan terbaik dengan harga yang tetap bersahabat untuk semua kalangan.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">🏅</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Pelanggan Setia</h3>
+<p class="text-gray-600 flex-grow">Kepercayaan dari pelanggan tetap dan ulasan positif menjadi bukti kualitas kami.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">🏆</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Bersertifikat Resmi</h3>
+<p class="text-gray-600 flex-grow">Memenuhi Standar Nasional layanan pijat tradisional. Kualitas dan keamanan terjamin.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">🛌</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Kepuasan Utama</h3>
+<p class="text-gray-600 flex-grow">Layanan ramah, bersih, dan menyeluruh demi kenyamanan dan kepercayaan Anda.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 bg-white" data-aos="fade-up" id="testimoni">
+<div class="container mx-auto px-6">
+<h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Apa Kata Pelanggan Kami?</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+<div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+<p class="text-gray-600 mb-4 italic">"Bapak Sahirin sangat profesional, saya merasa sangat rileks dan bugar setelah terapi! Layanan panggilannya juga sangat praktis."</p>
+<cite class="font-semibold text-gray-700 not-italic">— Bu Nining, Depok</cite>
+</div>
+<div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+<div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+<p class="text-gray-600 mb-4 italic">"Pelayanan sangat memuaskan, rasanya tubuh lebih segar dan siap beraktivitas setelah pijat refleksi. Top!"</p>
+<cite class="font-semibold text-gray-700 not-italic">— Pak Anwar, Cileungsi</cite>
+</div>
+<div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+<div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+<p class="text-gray-600 mb-4 italic">"Saya sering pegal karena kerja, SahirinCare jadi solusi terbaik. Nyeri punggung saya jauh berkurang. Terima kasih banyak!"</p>
+<cite class="font-semibold text-gray-700 not-italic">— Bu Sari, Jatiasih</cite>
+</div>
+<div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+<div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+<p class="text-gray-600 mb-4 italic">"Udah coba banyak tempat pijat, tapi di SahirinCare beda. Habis pijat masuk angin di sini, badan langsung plong!"</p>
+<cite class="font-semibold text-gray-700 not-italic">— Mas Rio, Rawalumbu</cite>
+</div>
+<div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+<div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+<p class="text-gray-600 mb-4 italic">"Tidur jadi lebih nyenyak dan badan rileks setelah diterapi. Recommended banget buat yang susah tidur karena badan kaku."</p>
+<cite class="font-semibold text-gray-700 not-italic">— Bu Ika, Bekasi Utara</cite>
+</div>
+<div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+<div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+<p class="text-gray-600 mb-4 italic">"Pertama kali coba langsung terasa bedanya. Badan yang tadinya pegal total langsung enteng! Terapisnya sopan dan ahli."</p>
+<cite class="font-semibold text-gray-700 not-italic">— Pak Hendra, Cikarang</cite>
+</div>
+<div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+<div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+<p class="text-gray-600 mb-4 italic">"Servis panggilan ke rumahnya sangat praktis dan cepat. Terapisnya datang tepat waktu, ramah, dan profesional."</p>
+<cite class="font-semibold text-gray-700 not-italic">— Pak Deni, Babelan</cite>
+</div>
+<div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+<div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+<p class="text-gray-600 mb-4 italic">"Anak saya jadi lebih tenang dan tidak rewel setelah dipijat di sini. Terapisnya sabar banget menghadapi anak-anak."</p>
+<cite class="font-semibold text-gray-700 not-italic">— Mbak Wulan, Tambun</cite>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-20 bg-gray-50" data-aos="fade-up" id="faq">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">Pertanyaan Umum (FAQ)</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Temukan jawaban atas pertanyaan yang sering diajukan tentang layanan SahirinCare.</p>
+        </div>
+        <div class="max-w-3xl mx-auto">
+            <div class="mb-4 border rounded-lg overflow-hidden">
+                <div class="accordion-header p-5 flex justify-between items-center bg-white text-gray-800 font-semibold">
+                    <span>Bagaimana cara memesan layanan SahirinCare?</span>
+                    <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                </div>
+                <div class="accordion-content p-5 bg-gray-50 text-gray-700">
+                    <p>Anda dapat memesan layanan kami dengan mudah melalui WhatsApp di nomor <a href="https://wa.me/6287808788589" class="text-green-600 hover:underline">0878-0878-8589</a> atau mengisi formulir pemesanan di bagian bawah halaman ini.</p>
+                </div>
+            </div>
+            <div class="mb-4 border rounded-lg overflow-hidden">
+                <div class="accordion-header p-5 flex justify-between items-center bg-white text-gray-800 font-semibold">
+                    <span>Apakah terapis datang langsung ke rumah pelanggan?</span>
+                    <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                </div>
+                <div class="accordion-content p-5 bg-gray-50 text-gray-700">
+                    <p>Ya, SahirinCare menyediakan layanan panggilan ke rumah (home service) untuk area Bekasi dan sekitarnya, memberikan kenyamanan maksimal bagi Anda.</p>
+                </div>
+            </div>
+            <div class="mb-4 border rounded-lg overflow-hidden">
+                <div class="accordion-header p-5 flex justify-between items-center bg-white text-gray-800 font-semibold">
+                    <span>Berapa lama durasi setiap sesi pijat?</span>
+                    <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                </div>
+                <div class="accordion-content p-5 bg-gray-50 text-gray-700">
+                    <p>Durasi sesi pijat bervariasi tergantung jenis layanan yang dipilih. Umumnya, sesi pijat terapis atau refleksi berlangsung sekitar 60-90 menit.</p>
+                </div>
+            </div>
+            <div class="mb-4 border rounded-lg overflow-hidden">
+                <div class="accordion-header p-5 flex justify-between items-center bg-white text-gray-800 font-semibold">
+                    <span>Apakah ada layanan pijat untuk anak-anak?</span>
+                    <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                </div>
+                <div class="accordion-content p-5 bg-gray-50 text-gray-700">
+                    <p>Tentu, kami memiliki paket khusus pijat anak-anak (minimal usia 4 tahun) dengan teknik yang lembut dan aman untuk menjaga kesehatan dan kenyamanan si kecil.</p>
+                </div>
+            </div>
+            <div class="mb-4 border rounded-lg overflow-hidden">
+                <div class="accordion-header p-5 flex justify-between items-center bg-white text-gray-800 font-semibold">
+                    <span>Bagaimana dengan protokol kesehatan selama pandemi?</span>
+                    <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                </div>
+                <div class="accordion-content p-5 bg-gray-50 text-gray-700">
+                    <p>Kami sangat mematuhi protokol kesehatan. Terapis kami selalu menggunakan masker, membersihkan tangan, dan memastikan kebersihan alat sebelum dan sesudah sesi pijat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-gray-50" data-aos="fade-up" id="blog">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-3xl font-bold mb-4 text-gray-800">Edukasi &amp; Tips Sehat</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Dapatkan artikel dan tips praktis untuk menjaga kesehatan tubuh dan pikiran Anda.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="blog-card bg-white rounded-lg shadow-md">
+<img alt="Manfaat Pijat Tradisional" class="w-full h-48 object-cover" loading="lazy" src="https://placehold.co/600x400/4CAF50/ffffff?text=Manfaat+Pijat"/>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2 text-gray-800">Manfaat Pijat Tradisional</h3>
+<p class="text-gray-600 mb-4">Membahas berbagai manfaat pijat untuk tubuh, mental, dan sirkulasi darah.</p>
+<a class="text-green-600 font-semibold hover:underline" href="#">Baca Selengkapnya</a>
+</div>
+</div>
+<div class="blog-card bg-white rounded-lg shadow-md">
+<img alt="Cara Mengatasi Pegal" class="w-full h-48 object-cover" src="https://placehold.co/600x400/4CAF50/ffffff?text=Atasi+Pegal"/>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2 text-gray-800">Cara Mengatasi Pegal Setelah Kerja</h3>
+<p class="text-gray-600 mb-4">Tips dan teknik untuk meredakan nyeri punggung tanpa obat.</p>
+<a class="text-green-600 font-semibold hover:underline" href="#">Baca Selengkapnya</a>
+</div>
+</div>
+<div class="blog-card bg-white rounded-lg shadow-md">
+<img alt="Waktu Terbaik untuk Pijat" class="w-full h-48 object-cover" loading="lazy" src="https://placehold.co/600x400/4CAF50/ffffff?text=Waktu+Pijat"/>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2 text-gray-800">Kapan Waktu Terbaik untuk Pijat?</h3>
+<p class="text-gray-600 mb-4">Pentingnya merawat tubuh melalui pijat untuk kesehatan jangka panjang.</p>
+<a class="text-green-600 font-semibold hover:underline" href="#">Baca Selengkapnya</a>
+</div>
+</div>
+</div>
+<div class="text-center mt-12">
+<a class="inline-block px-8 py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 transition" href="#">
+        Baca Artikel Lainnya
+      </a>
+</div>
+</div>
+</section>
+<section class="py-20 bg-white" data-aos="fade-up" id="contact">
+<form action="https://formspree.io/f/xblyvyrl" class="max-w-lg mx-auto bg-gray-50 p-8 rounded-lg shadow-md" id="my-form" method="POST">
+<input class="w-full p-3 mb-4 border rounded-md" name="Nama" placeholder="Nama Lengkap" required="" type="text"/>
+<input class="w-full p-3 mb-4 border rounded-md" name="Telepon" placeholder="Nomor Telepon" required="" type="tel"/>
+<select class="w-full p-3 mb-4 border rounded-md" name="Layanan" required="">
+<option value="">-- Pilih Layanan --</option>
+<option value="Pijat Tradisional">Pijat Tradisional</option>
+<option value="Pijat Refleksi">Pijat Refleksi</option>
+<option value="Pijat ke Rumah">Pijat ke Rumah</option>
+<option value="Pijat Masuk Angin">Pijat Masuk Angin</option>
+<option value="Terapis Nyeri Punggung">Terapis Nyeri Punggung</option>
+<option value="Pijat Anak-Anak">Pijat Anak-Anak</option>
+</select>
+<input class="w-full p-3 mb-4 border rounded-md" name="Jadwal" type="datetime-local"/>
+<textarea class="w-full p-3 mb-4 border rounded-md" name="Pesan" placeholder="Pesan Tambahan (contoh: alamat lengkap)" rows="4"></textarea>
+<button class="w-full py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 transition" id="my-form-button" type="submit">
+<i class="fas fa-paper-plane mr-2"></i> Kirim Pesanan
+      </button>
+<p class="text-center mt-4 font-semibold text-green-600" id="my-form-status"></p>
+</form>
+</section>
+
+<footer class="py-6 bg-gray-800">
+<div class="container mx-auto px-6 text-center">
+<p class="text-white">© 2024 SahirinCare. All rights reserved.</p>
+<div class="flex justify-center space-x-4 mt-2">
+<a class="text-white hover:text-green-400" href="#">Facebook</a>
+<a class="text-white hover:text-green-400" href="#">Instagram</a>
+<a class="text-white hover:text-green-400" href="https://wa.me/6287808788589" target="_blank">WhatsApp</a>
+</div>
+</div>
+
+<section class="py-20 bg-gray-50" id="admin-login">
+  <div class="container mx-auto px-6 max-w-xl">
+    <div class="bg-white p-8 rounded-lg shadow-md">
+      <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Login Admin</h2>
+      <form id="admin-login-form" class="space-y-4">
+        <input type="text" placeholder="Username" class="w-full p-3 border rounded-md bg-white text-gray-800" required>
+        <input type="password" placeholder="Password" class="w-full p-3 border rounded-md bg-white text-gray-800" required>
+        <button type="submit" class="w-full py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 transition">
+          Masuk
+        </button>
+      </form>
+      <p id="login-status" class="mt-4 text-center text-sm text-red-600 hidden">Login gagal. Coba lagi.</p>
+    </div>
+  </div>
+</section>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" aria-label="Kembali ke atas">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  function translateLanguage(lang) {
+    var frame = document.querySelector('iframe.goog-te-banner-frame');
+    if (!frame) {
+      var script = document.createElement('script');
+      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      document.head.appendChild(script);
+    }
+    var selectEl = document.querySelector('.goog-te-combo');
+    if (selectEl) selectEl.value = lang;
+    var evt = document.createEvent("HTMLEvents");
+    evt.initEvent("change", false, true);
+    selectEl.dispatchEvent(evt);
+  }
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'id',
+      includedLanguages: 'id,en,ar,ja,fr,de,zh-CN,ko,hi',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
