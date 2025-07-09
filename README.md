@@ -1,2 +1,0 @@
-# sahirincare-web
-web
