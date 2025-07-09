@@ -9,7 +9,402 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/index.css" />
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* Hijau Daun */
+            --secondary-color: #F8F8F8; /* Krem Lembut */
+            --text-color: #333;
+            --light-text-color: #666;
+            --white-color: #FFFFFF;
+            --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+            /* Dark Mode Variables */
+            --dark-background: #1a202c;
+            --dark-text-color: #e2e8f0;
+            --dark-light-text-color: #a0aec0;
+            --dark-card-background: #2d3748;
+            --dark-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+		
+        body {
+            font-family: 'Poppins', sans-serif;
+			scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Animasi getar untuk form login gagal */
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+          20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
+        }
+
+        .hero-image {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/image/image%201/image%201.jpg') center/cover;
+            height: 80vh;
+        }
+        
+        .service-card, .feature-card, .blog-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease, color 0.3s ease;
+		}
+        
+        .service-card:hover, .feature-card:hover, .blog-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .blog-card img {
+            transition: transform 0.3s ease-in-out;
+        }
+        .blog-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-btn {
+            transition: all 0.3s ease;
+        }
+        .whatsapp-btn:hover {
+            background-color: #128C7E !important;
+            transform: scale(1.05);
+        }
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+
+        /* --- STYLES FOR DARK MODE TOGGLE --- */
+        .dark-mode-toggle .toggle-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 50px;
+            height: 26px;
+            background-color: #87CEEB; /* Sky blue for day */
+            border-radius: 50px;
+            position: relative;
+            padding: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dark-mode-toggle .ball {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            position: absolute;
+            top: 3px;
+            left: 4px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .dark-mode-toggle .fa-sun {
+            color: #f39c12; /* Sun color */
+            font-size: 14px;
+        }
+        .dark-mode-toggle .fa-moon {
+            color: #f1c40f; /* Moon color */
+            font-size: 14px;
+        }
+        .dark-mode-toggle input:checked + .toggle-label {
+            background-color: #4A5568; /* Darker grey for night */
+        }
+        .dark-mode-toggle input:checked + .toggle-label .ball {
+            transform: translateX(24px);
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: var(--dark-background);
+            color: var(--dark-text-color);
+        }
+        body.dark-mode header, body.dark-mode nav {
+            background-color: var(--dark-card-background);
+            box-shadow: var(--dark-shadow);
+        }
+        body.dark-mode .text-gray-800, 
+        body.dark-mode .text-gray-700, 
+        body.dark-mode .text-gray-600,
+        body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode h5, body.dark-mode h6,
+        body.dark-mode p, body.dark-mode li {
+             color: var(--dark-text-color);
+        }
+        body.dark-mode .logo {
+            color: var(--primary-color);
+        }
+        body.dark-mode nav ul li a {
+            color: var(--dark-text-color);
+        }
+        body.dark-mode nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        body.dark-mode .mobile-menu, body.dark-mode #mobile-lang-menu {
+            background-color: var(--dark-card-background);
+        }
+        body.dark-mode #mobile-lang-menu a {
+            color: var(--dark-text-color);
+        }
+        body.dark-mode #mobile-lang-menu a:hover {
+            background-color: #3a455a;
+        }
+        body.dark-mode .hero {
+            background-color: var(--dark-background);
+        }
+        body.dark-mode .hero h1 {
+            color: var(--primary-color);
+        }
+        body.dark-mode .hero p {
+            color: var(--dark-light-text-color);
+        }
+        body.dark-mode .bg-white {
+            background-color: var(--dark-card-background);
+            box-shadow: var(--dark-shadow);
+        }
+        body.dark-mode .bg-gray-50, body.dark-mode .bg-gray-100 {
+            background-color: var(--dark-background);
+        }
+        body.dark-mode .bg-green-50 {
+             background-color: #1a202c;
+        }
+        body.dark-mode .bg-gray-50.p-8 {
+            background-color: var(--dark-card-background);
+        }
+        body.dark-mode .service-card,
+        body.dark-mode .feature-card,
+        body.dark-mode .blog-card {
+            background-color: var(--dark-card-background);
+            box-shadow: var(--dark-shadow);
+        }
+        body.dark-mode .testimonial-item {
+            border-left-color: var(--primary-color);
+        }
+        body.dark-mode .testimonial-item cite {
+            color: var(--dark-text-color);
+        }
+        body.dark-mode footer {
+            background-color: #000;
+            color: var(--dark-text-color);
+        }
+        body.dark-mode footer a {
+            color: var(--primary-color);
+        }
+        body.dark-mode .shadow-md, body.dark-mode .shadow-lg {
+            box-shadow: var(--dark-shadow);
+        }
+        body.dark-mode .border {
+            border-color: #4a5568;
+        }
+        body.dark-mode input,
+        body.dark-mode select,
+        body.dark-mode textarea {
+            background-color: #4a5568;
+            color: var(--dark-text-color);
+            border-color: #667eea;
+        }
+        body.dark-mode input::placeholder,
+        body.dark-mode textarea::placeholder {
+            color: var(--dark-light-text-color);
+        }
+        body.dark-mode .whatsapp-btn {
+            background-color: var(--primary-color);
+        }
+        body.dark-mode .whatsapp-btn:hover {
+            background-color: #38a169 !important;
+        }
+        body.dark-mode .service-card a,
+        body.dark-mode .blog-card a {
+            color: var(--primary-color);
+        }
+        body.dark-mode .service-card a:hover,
+        body.dark-mode .blog-card a:hover {
+            color: #38a169;
+        }
+        .filter-button.active {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+        body.dark-mode .filter-button {
+            background-color: var(--dark-card-background);
+            color: var(--dark-text-color);
+            border-color: #4a5568;
+        }
+        body.dark-mode .filter-button.active {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: #f0f0f0;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.active {
+            max-height: 200px;
+            transition: max-height 0.3s ease-in;
+        }
+        body.dark-mode .accordion-header {
+            background-color: var(--dark-card-background);
+            color: var(--dark-text-color);
+        }
+        body.dark-mode .accordion-header:hover {
+            background-color: #3a455a;
+        }
+        body.dark-mode .accordion-content {
+            background-color: var(--dark-background);
+            color: var(--dark-light-text-color);
+        }
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 12px 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #back-to-top:hover {
+            background-color: #38a169;
+        }
+        html {
+          scroll-behavior: smooth;
+        }
+        /* FIX: Google Translate specific styles to prevent dark mode interference */
+        body .goog-te-banner-frame.skiptranslate,
+        body .goog-te-spinner-pos,
+        body .goog-te-gadget-icon,
+        body .goog-te-balloon-frame {
+          display: none !important;
+        }
+        body {
+          top: 0px !important;
+        }
+        .goog-logo-link,
+        .goog-te-gadget span {
+          display: none !important;
+        }
+        /* FIX: Ensure Google Translate elements don't inherit dark mode colors */
+        .goog-te-combo, .goog-te-combo option {
+            background-color: white !important;
+            color: black !important;
+        }
+        body.dark-mode .goog-te-combo, body.dark-mode .goog-te-combo option {
+            background-color: white !important; /* Keep white in dark mode */
+            color: black !important; /* Keep black text in dark mode */
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        body.dark-mode .modal-content {
+            background: var(--dark-card-background);
+        }
+        /* FIX: Background AI di Dark Mode */
+        body.dark-mode #gemini-recommendation .bg-white,
+        body.dark-mode #blog .bg-white {
+            background-color: var(--dark-card-background); /* Menggunakan warna card dark mode */
+        }
+        body.dark-mode #gemini-recommendation .bg-green-50,
+        body.dark-mode #blog .bg-green-50 {
+            background-color: var(--dark-background); /* Menggunakan warna background dark mode */
+        }
+        body.dark-mode #recommendation-output,
+        body.dark-mode #health-tip-output {
+            background-color: var(--dark-background); /* Menggunakan warna background dark mode */
+            border-color: var(--dark-light-text-color); /* Border yang lebih gelap */
+        }
+
+        .loader-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Tambahan CSS untuk Testimonial Carousel */
+        .testimonial-carousel {
+            overflow: hidden; /* Pastikan overflow hidden untuk track */
+        }
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out; /* Transisi lebih halus */
+        }
+        .testimonial-item-wrapper {
+            flex-shrink: 0;
+            width: 100%; /* Setiap item mengambil 100% lebar container */
+            padding: 0 1rem; /* Padding horizontal untuk item */
+            box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+        }
+        /* Pastikan tombol navigasi terlihat di atas carousel */
+        .testimonial-carousel button {
+            z-index: 10;
+        }
+</style>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css"/>
 </head>
 <body class="text-gray-800 bg-white">
@@ -1073,5 +1468,6 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
+    <script src="js/index.js"></script>
 </body>
 </html>
