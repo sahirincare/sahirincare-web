@@ -1,0 +1,54 @@
+:root {
+            --primary-color: #4CAF50;
+            --dark-bg: #1a202c;
+            --dark-card: #2d3748;
+            --dark-text: #e2e8f0;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .sidebar-link {
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .sidebar-link.active i {
+            color: white;
+        }
+        /* Dark Mode Styles */
+        body.dark {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        body.dark .bg-gray-100 { background-color: var(--dark-bg); }
+        body.dark .bg-white { background-color: var(--dark-card); }
+        body.dark .text-gray-800 { color: var(--dark-text); }
+        body.dark .text-gray-600 { color: #a0aec0; }
+        body.dark .text-gray-500 { color: #718096; }
+        body.dark .sidebar { background-color: var(--dark-card); }
+        body.dark .sidebar-link:hover, body.dark .sidebar-link.active {
+            background-color: var(--primary-color);
+        }
+        body.dark table th { background-color: #374151; }
+        body.dark table tr:nth-child(even) { background-color: #374151; }
+        body.dark table tr:nth-child(odd) { background-color: var(--dark-card); }
+        body.dark input, body.dark textarea, body.dark select {
+            background-color: #4a5568;
+            border-color: #6b7280;
+            color: var(--dark-text);
+        }
+        body.dark input::placeholder, body.dark textarea::placeholder {
+            color: #a0aec0;
+        }
+        body.dark .border-gray-200 { border-color: #4a5568; }
+        .stat-card { transition: transform 0.2s, box-shadow 0.2s; }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        body.dark .stat-card:hover {
+             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
