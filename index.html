@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<link rel="manifest" href="manifest.json">
+
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SahirinCare - Layanan Pijat Terapis Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* Hijau Daun */
+            --secondary-color: #F8F8F8; /* Krem Lembut */
+            --text-color: #333;
+            --light-text-color: #666;
+            --white-color: #FFFFFF;
+            --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+            /* Dark Mode Variables */
+            --dark-background: #1a202c;
+            --dark-text-color: #e2e8f0;
+            --dark-light-text-color: #a0aec0;
+            --dark-card-background: #2d3748;
+            --dark-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+		
+        body {
+            font-family: 'Poppins', sans-serif;
+			scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Animasi getar untuk form login gagal */
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+          20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
+        }
+
+        .hero-image {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('image/image 1/image 1.jpg') center/cover;
+            height: 80vh;
+        }
+        
+        .service-card, .feature-card, .blog-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease, color 0.3s ease;
+		}
+        
+        .service-card:hover, .feature-card:hover, .blog-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .blog-card img {
+            transition: transform 0.3s ease-in-out;
+        }
+        .blog-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-btn {
+            transition: all 0.3s ease;
+        }
+        .whatsapp-btn:hover {
+            background-color: #128C7E !important;
+            transform: scale(1.05);
+        }
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+
+        /* --- STYLES FOR DARK MODE TOGGLE --- */
+        .dark-mode-toggle .toggle-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 50px;
+            height: 26px;
+            background-color: #87CEEB; /* Sky blue for day */
+            border-radius: 50px;
+            position: relative;
+            padding: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dark-mode-toggle .ball {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            position: absolute;
+            top: 3px;
+            left: 4px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .dark-mode-toggle .fa-sun {
+            color: #f39c12; /* Sun color */
+            font-size: 14px;
+        }
+        .dark-mode-toggle .fa-moon {
+            color: #f1c40f; /* Moon color */
+            font-size: 14px;
+        }
+        .dark-mode-toggle input:checked + .toggle-label {
+            background-color: #4A5568; /* Darker grey for night */
+        }
+        .dark-mode-toggle input:checked + .toggle-label .ball {
+            transform: translateX(24px);
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: var(--dark-background);
+            color: var(--dark-text-color);
+        }
+        body.dark-mode header, body.dark-mode nav {
+            background-color: var(--dark-card-background);
+            box-shadow: var(--dark-shadow);
+        }
+        body.dark-mode .text-gray-800, 
+        body.dark-mode .text-gray-700, 
+        body.dark-mode .text-gray-600,
+        body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode h5, body.dark-mode h6,
+        body.dark-mode p, body.dark-mode li {
+             color: var(--dark-text-color);
+        }
+        body.dark-mode .logo {
+            color: var(--primary-color);
+        }
+        body.dark-mode nav ul li a {
+            color: var(--dark-text-color);
+        }
+        body.dark-mode nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        body.dark-mode .mobile-menu, body.dark-mode #mobile-lang-menu {
+            background-color: var(--dark-card-background);
+        }
+        body.dark-mode #mobile-lang-menu a {
+            color: var(--dark-text-color);
+        }
+        body.dark-mode #mobile-lang-menu a:hover {
+            background-color: #3a455a;
+        }
+        body.dark-mode .hero {
+            background-color: var(--dark-background);
+        }
+        body.dark-mode .hero h1 {
+            color: var(--primary-color);
+        }
+        body.dark-mode .hero p {
+            color: var(--dark-light-text-color);
+        }
+        body.dark-mode .bg-white {
+            background-color: var(--dark-card-background);
+            box-shadow: var(--dark-shadow);
+        }
+        body.dark-mode .bg-gray-50, body.dark-mode .bg-gray-100 {
+            background-color: var(--dark-background);
+        }
+        body.dark-mode .bg-green-50 {
+             background-color: #1a202c;
+        }
+        body.dark-mode .bg-gray-50.p-8 {
+            background-color: var(--dark-card-background);
+        }
+        body.dark-mode .service-card,
+        body.dark-mode .feature-card,
+        body.dark-mode .blog-card {
+            background-color: var(--dark-card-background);
+            box-shadow: var(--dark-shadow);
+        }
+        body.dark-mode .testimonial-item {
+            border-left-color: var(--primary-color);
+        }
+        body.dark-mode .testimonial-item cite {
+            color: var(--dark-text-color);
+        }
+        body.dark-mode footer {
+            background-color: #000;
+            color: var(--dark-text-color);
+        }
+        body.dark-mode footer a {
+            color: var(--primary-color);
+        }
+        body.dark-mode .shadow-md, body.dark-mode .shadow-lg {
+            box-shadow: var(--dark-shadow);
+        }
+        body.dark-mode .border {
+            border-color: #4a5568;
+        }
+        body.dark-mode input,
+        body.dark-mode select,
+        body.dark-mode textarea {
+            background-color: #4a5568;
+            color: var(--dark-text-color);
+            border-color: #667eea;
+        }
+        body.dark-mode input::placeholder,
+        body.dark-mode textarea::placeholder {
+            color: var(--dark-light-text-color);
+        }
+        body.dark-mode .whatsapp-btn {
+            background-color: var(--primary-color);
+        }
+        body.dark-mode .whatsapp-btn:hover {
+            background-color: #38a169 !important;
+        }
+        body.dark-mode .service-card a,
+        body.dark-mode .blog-card a {
+            color: var(--primary-color);
+        }
+        body.dark-mode .service-card a:hover,
+        body.dark-mode .blog-card a:hover {
+            color: #38a169;
+        }
+        .filter-button.active {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+        body.dark-mode .filter-button {
+            background-color: var(--dark-card-background);
+            color: var(--dark-text-color);
+            border-color: #4a5568;
+        }
+        body.dark-mode .filter-button.active {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: #f0f0f0;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.active {
+            max-height: 200px;
+            transition: max-height 0.3s ease-in;
+        }
+        body.dark-mode .accordion-header {
+            background-color: var(--dark-card-background);
+            color: var(--dark-text-color);
+        }
+        body.dark-mode .accordion-header:hover {
+            background-color: #3a455a;
+        }
+        body.dark-mode .accordion-content {
+            background-color: var(--dark-background);
+            color: var(--dark-light-text-color);
+        }
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 12px 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #back-to-top:hover {
+            background-color: #38a169;
+        }
+        html {
+          scroll-behavior: smooth;
+        }
+        /* FIX: Google Translate specific styles to prevent dark mode interference */
+        body .goog-te-banner-frame.skiptranslate,
+        body .goog-te-spinner-pos,
+        body .goog-te-gadget-icon,
+        body .goog-te-balloon-frame {
+          display: none !important;
+        }
+        body {
+          top: 0px !important;
+        }
+        .goog-logo-link,
+        .goog-te-gadget span {
+          display: none !important;
+        }
+        /* FIX: Ensure Google Translate elements don't inherit dark mode colors */
+        .goog-te-combo, .goog-te-combo option {
+            background-color: white !important;
+            color: black !important;
+        }
+        body.dark-mode .goog-te-combo, body.dark-mode .goog-te-combo option {
+            background-color: white !important; /* Keep white in dark mode */
+            color: black !important; /* Keep black text in dark mode */
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        body.dark-mode .modal-content {
+            background: var(--dark-card-background);
+        }
+        /* FIX: Background AI di Dark Mode */
+        body.dark-mode #gemini-recommendation .bg-white,
+        body.dark-mode #blog .bg-white {
+            background-color: var(--dark-card-background); /* Menggunakan warna card dark mode */
+        }
+        body.dark-mode #gemini-recommendation .bg-green-50,
+        body.dark-mode #blog .bg-green-50 {
+            background-color: var(--dark-background); /* Menggunakan warna background dark mode */
+        }
+        body.dark-mode #recommendation-output,
+        body.dark-mode #health-tip-output {
+            background-color: var(--dark-background); /* Menggunakan warna background dark mode */
+            border-color: var(--dark-light-text-color); /* Border yang lebih gelap */
+        }
+
+        .loader-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Tambahan CSS untuk Testimonial Carousel */
+        .testimonial-carousel {
+            overflow: hidden; /* Pastikan overflow hidden untuk track */
+        }
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out; /* Transisi lebih halus */
+        }
+        .testimonial-item-wrapper {
+            flex-shrink: 0;
+            width: 100%; /* Setiap item mengambil 100% lebar container */
+            padding: 0 1rem; /* Padding horizontal untuk item */
+            box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+        }
+        /* Pastikan tombol navigasi terlihat di atas carousel */
+        .testimonial-carousel button {
+            z-index: 10;
+        }
+</style>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css"/>
+</head>
+<body class="text-gray-800 bg-white">
+
+<!-- Loader and Scroll Progress Bar -->
+<div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;">
+    <img src="image/loader/loader.png" alt="SahirinCare Logo" style="animation: bounce 1s infinite;">
+</div>
+<div id="scroll-progress" style="position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: #4CAF50; z-index: 9999; transition: width 0.25s ease;"></div>
+
+<!-- Navigation -->
+<nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <div class="flex-shrink-0">
+                <a href="#home" class="font-semibold text-gray-800 text-2xl">Sahirin<span class="text-green-600">Care</span></a>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-6">
+                <a class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition" href="#contact">Booking</a>
+                <div class="relative group">
+                    <button id="hamburger-toggle-desktop" class="text-gray-700 hover:text-green-600 text-2xl focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div id="hamburger-menu-desktop" class="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-50 hidden p-4 text-sm text-gray-700 transition-all duration-300 ease-out">
+                        <a class="block py-1 hover:text-green-600" href="#home">Beranda</a>
+                        <a class="block py-1 hover:text-green-600" href="#about">Tentang</a>
+                        <a class="block py-1 hover:text-green-600" href="#about-us">About Us</a>
+                        <a class="block py-1 hover:text-green-600" href="#services">Layanan</a>
+                        <a class="block py-1 hover:text-green-600" href="#gemini-recommendation">Rekomendasi AI</a>
+                        <a class="block py-1 hover:text-green-600" href="#keunggulan">Keunggulan</a>
+                        <a class="block py-1 hover:text-green-600" href="#testimoni">Testimoni</a>
+                        <a class="block py-1 hover:text-green-600" href="#faq">FAQ</a>
+                        <a class="block py-1 hover:text-green-600" href="#blog">Tips Sehat</a>
+                        <hr class="my-2">
+                        <a class="block py-1 hover:text-green-600 font-semibold" href="#admin-login">Admin & Informasi Sistem</a>
+                    </div>
+                </div>
+                <div class="dark-mode-toggle">
+                    <input type="checkbox" id="darkToggleDesktop" class="hidden">
+                    <label for="darkToggleDesktop" class="toggle-label">
+                        <i class="fas fa-sun"></i><i class="fas fa-moon"></i><span class="ball"></span>
+                    </label>
+                </div>
+                <div class="hidden md:flex items-center">
+                    <select id="language-select" onchange="SahirinCareApp.translateLanguage(this.value)" class="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 text-sm focus:outline-none">
+                        <option value="id">🇮🇩 ID</option>
+                        <option value="en">🇬🇧 EN</option>
+                        <option value="ar">🇸🇦 AR</option>
+                        <option value="ja">🇯🇵 JA</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="md:hidden flex items-center space-x-4">
+                <div class="relative">
+                    <button id="mobile-lang-toggle" class="text-gray-700 hover:text-green-600 focus:outline-none text-xl">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div id="mobile-lang-menu" class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50 hidden p-2 text-sm">
+                        <a href="javascript:void(0);" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="SahirinCareApp.translateLanguage('id'); SahirinCareApp.closeLangMenu();">🇮🇩 Indonesia</a>
+                        <a href="javascript:void(0);" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="SahirinCareApp.translateLanguage('en'); SahirinCareApp.closeLangMenu();">🇬🇧 English</a>
+                        <a href="javascript:void(0);" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="SahirinCareApp.translateLanguage('ar'); SahirinCareApp.closeLangMenu();">🇸🇦 Arabic</a>
+                        <a href="javascript:void(0);" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="SahirinCareApp.translateLanguage('ja'); SahirinCareApp.closeLangMenu();">🇯🇵 Japanese</a>
+                        <a href="javascript:void(0);" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="SahirinCareApp.translateLanguage('fr'); SahirinCareApp.closeLangMenu();">🇫🇷 French</a>
+                        <a href="javascript:void(0);" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="SahirinCareApp.translateLanguage('de'); SahirinCareApp.closeLangMenu();">🇩🇪 German</a>
+                        <a href="javascript:void(0);" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="SahirinCareApp.translateLanguage('zh-CN'); SahirinCareApp.closeLangMenu();">🇨🇳 Chinese</a>
+                        <a href="javascript:void(0);" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="SahirinCareApp.translateLanguage('ko'); SahirinCareApp.closeLangMenu();">🇰🇷 Korean</a>
+                        <a href="javascript:void(0);" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="SahirinCareApp.translateLanguage('hi'); SahirinCareApp.closeLangMenu();">🇮🇳 Hindi</a>
+                    </div>
+                </div>
+                <div class="dark-mode-toggle">
+                    <input type="checkbox" id="darkToggleMobile" class="hidden">
+                    <label for="darkToggleMobile" class="toggle-label" style="height: 24px; width: 48px;"><i class="fas fa-sun"></i><i class="fas fa-moon"></i><span class="ball" style="height: 18px; width: 18px;"></span></label>
+                </div>
+                <button class="outline-none text-xl" id="mobile-menu-button">
+                    <i class="fas fa-bars text-gray-700"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-menu md:hidden bg-white shadow-lg" id="mobile-menu">
+        <div class="px-2 pt-2 pb-4 space-y-1">
+            <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#home">Beranda</a>
+            <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#about">Tentang</a>
+            <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#services">Layanan</a>
+            <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#gemini-recommendation">Rekomendasi AI</a>
+            <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#keunggulan">Keunggulan</a>
+            <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#testimoni">Testimoni</a>
+            <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#faq">FAQ</a>
+            <a class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50" href="#blog">Tips Sehat</a>
+            <a class="block px-3 py-2 rounded-md text-base font-medium text-white bg-green-600 hover:bg-green-700 mt-4" href="#contact">Booking Sekarang</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content Sections... (Hero, About, etc.) -->
+<section class="hero-image flex items-center" data-aos="fade-up" id="home">
+<div class="container mx-auto px-6 text-center">
+<h1 class="text-4xl md:text-6xl font-bold text-white mb-4">Sahirin<span class="text-green-400">Care</span></h1>
+<p class="text-xl md:text-2xl text-white mb-8">Layanan Pijat Terapis Profesional</p>
+<p class="text-lg text-gray-100 mb-10 max-w-3xl mx-auto">Hadir untuk memberikan solusi terapi tubuh alami, aman, dan terpercaya langsung ke rumah Anda di Bekasi dan sekitarnya.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<a class="whatsapp-btn inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full text-lg" href="https://wa.me/6287808788589" target="_blank">
+<i class="fab fa-whatsapp mr-2"></i> Pesan via WhatsApp
+                </a>
+<a class="inline-flex items-center justify-center bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-semibold py-3 px-8 rounded-full text-lg" href="#services">
+<i class="fas fa-spa mr-2"></i> Lihat Layanan
+                </a>
+</div>
+</div>
+</section>
+<section class="py-20 bg-gray-50" data-aos="fade-up" id="about">
+<div class="container mx-auto px-6">
+<div class="flex flex-col lg:flex-row items-center">
+<div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+<img alt="Bapak Sahirin, terapis profesional" class="rounded-lg shadow-lg w-full" loading="lazy" src="https://placehold.co/600x400/4CAF50/ffffff?text=Bapak+Sahirin+Terapis"/>
+</div>
+<div class="lg:w-1/2">
+<h2 class="text-3xl font-bold mb-6 text-gray-800">Tentang SahirinCare</h2>
+<p class="text-gray-600 mb-4">SahirinCare adalah layanan pijat terapis &amp; pijat refleksi profesional yang beroperasi secara fleksibel dengan sistem panggilan ke rumah.</p>
+<p class="text-600 mb-6">Bisnis ini dirintis dan dijalankan oleh Bapak Sahirin, seorang terapis berpengalaman lebih dari 20 tahun yang telah membantu ratusan pelanggan merasakan kembali kenyamanan tubuh dan ketenangan pikiran.</p>
+<div class="mb-8">
+<h3 class="text-xl font-semibold mb-3 text-green-600">Visi Kami</h3>
+<p class="text-gray-600">Menjadi layanan terapis terpercaya yang memberikan solusi nyaman untuk kesehatan tubuh dan pikiran melalui sentuhan tangan ahli.</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-white p-4 rounded-lg shadow-sm">
+<div class="text-green-600 text-2xl mb-2">
+<i class="fas fa-user-check"></i>
+</div>
+<h4 class="font-semibold">20+ Tahun Pengalaman</h4>
+<p class="text-sm text-gray-600">Pengalaman luas dalam terapis tradisional</p>
+</div>
+<div class="bg-white p-4 rounded-lg shadow-sm">
+<div class="text-green-600 text-2xl mb-2">
+<i class="fas fa-home"></i>
+</div>
+<h4 class="font-semibold">Layanan Ke Rumah</h4>
+<p class="text-sm text-gray-600">Area Bekasi dan sekitarnya</p>
+</div>
+</div>
+<a class="whatsapp-btn inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full" href="https://wa.me/6287808788589" target="_blank">
+<i class="fab fa-whatsapp mr-2"></i> Hubungi Kami
+                    </a>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 bg-white" id="about-us" data-aos="fade-up">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4 text-gray-800">About Us</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        SahirinCare didirikan oleh Bapak Sahirin, seorang terapis berpengalaman lebih dari 20 tahun yang memiliki komitmen dalam memberikan pelayanan pijat profesional, aman, dan terpercaya langsung ke rumah Anda. 
+        Kami percaya bahwa kesehatan adalah investasi jangka panjang, dan melalui terapi pijat yang tepat, pelanggan dapat merasakan manfaat fisik dan mental secara menyeluruh.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+        <i class="fas fa-heartbeat text-green-600 text-3xl mb-4"></i>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Misi Kami</h3>
+        <p class="text-gray-600">Memberikan kenyamanan dan kesehatan terbaik melalui terapi pijat tradisional yang personal dan berpengalaman.</p>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+        <i class="fas fa-hand-holding-heart text-green-600 text-3xl mb-4"></i>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Nilai Kami</h3>
+        <p class="text-gray-600">Empati, profesionalisme, kepercayaan, dan pelayanan yang ramah adalah fondasi dari semua layanan kami.</p>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+        <i class="fas fa-users text-green-600 text-3xl mb-4"></i>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Komitmen</h3>
+        <p class="text-gray-600">Kami berkomitmen penuh terhadap kualitas layanan dan privasi pelanggan dalam setiap sesi terapi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-white" data-aos="fade-up" id="services">
+<div class="container mx-auto px-6">
+<div class="text-center mb-10">
+<h2 class="text-3xl font-bold mb-4 text-gray-800">Layanan Kami</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Berbagai jenis terapis yang kami tawarkan untuk membantu Anda mendapatkan tubuh yang lebih sehat dan rileks.</p>
+</div>
+
+<div class="flex flex-wrap justify-center gap-4 mb-12" id="service-filters">
+    <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 transition active" data-filter="all">Semua</button>
+    <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 transition" data-filter="terapis">Pijat Terapis</button>
+    <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 transition" data-filter="refleksi">Pijat Refleksi</button>
+    <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 transition" data-filter="anak">Pijat Anak</button>
+    <button class="filter-button px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 transition" data-filter="lainnya">Lainnya</button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="service-list">
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="terapis">
+<img alt="Pijat Terapis" class="w-full h-48 object-cover" loading="lazy" src="image/image 3/image 3.jpg"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Pijat Terapis</h3>
+<p class="text-gray-600 mb-4 flex-grow">Pijat seluruh tubuh dengan teknik khas untuk melancarkan peredaran darah, mengurangi pegal, dan merilekskan otot tegang.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 80.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="refleksi">
+<img alt="Pijat Refleksi" class="w-full h-48 object-cover" loading="lazy" src="image/image 4/image 4.jpg"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Pijat Refleksi</h3>
+<p class="text-gray-600 mb-4 flex-grow">Pijat titik refleksi di kaki dan tangan untuk melancarkan energi, mengurangi stres, dan menyeimbangkan fungsi organ.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 80.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="lainnya">
+<img alt="Pijat ke Rumah" class="w-full h-48 object-cover" loading="lazy" src="image/image 5/image 5.jpg"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Pijat ke Rumah</h3>
+<p class="text-gray-600 mb-4 flex-grow">Layanan panggilan ke rumah di area Bekasi dan sekitarnya, memberikan kenyamanan maksimal tanpa perlu keluar rumah.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 100.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="lainnya">
+<img alt="Pijat Masuk Angin" class="w-full h-48 object-cover" loading="lazy" src="image/image 6/image 6.jpg"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Pijat Masuk Angin</h3>
+<p class="text-gray-600 mb-4 flex-grow">Mengatasi meriang atau tidak enak badan dengan pijat ringan dan kerokan tradisional untuk membuat badan kembali lega.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 80.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="terapis">
+<img alt="Terapis Nyeri Punggung" class="w-full h-48 object-cover" loading="lazy" src="image/image 7/image 7.jpg"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Terapis Nyeri Punggung</h3>
+<p class="text-gray-600 mb-4 flex-grow">Pijat fokus pada punggung bawah atau pinggang yang tegang karena duduk terlalu lama atau aktivitas berat.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 80.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+<div class="service-card bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col" data-category="anak">
+<img alt="Pijat Anak" class="w-full h-48 object-cover" loading="lazy" src="image/image 8/image 8.jpg"/>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="text-xl font-bold text-gray-800 mb-2">Pijat Anak-Anak</h3>
+<p class="text-gray-600 mb-4 flex-grow">Paket khusus untuk anak (minimal 4 tahun) dengan harga spesial untuk menjaga kesehatan dan kenyamanan si kecil.</p>
+<div class="text-center mt-auto">
+<p class="text-gray-700 font-semibold mb-2">Mulai dari Rp 50.000</p>
+<a class="inline-block px-6 py-2 border border-green-600 text-green-600 font-medium rounded-md hover:bg-green-600 hover:text-white transition" href="#contact">Pesan Sekarang</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== GEMINI FEATURE: REKOMENDASI CERDAS ===== -->
+<section class="py-20 bg-green-50" data-aos="fade-up" id="gemini-recommendation">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-gray-800">Bingung Pilih Layanan?</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto mb-8">Jelaskan keluhan Anda di bawah ini, dan biarkan asisten AI kami merekomendasikan layanan yang paling tepat untuk Anda.</p>
+        <div class="max-w-xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+            <textarea id="gemini-input" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent transition" rows="4" placeholder="Contoh: Pundak saya terasa kaku dan kepala sering pusing setelah seharian bekerja di depan komputer..."></textarea>
+            <button id="get-gemini-response-btn" class="mt-4 w-full py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 transition transform hover:scale-105">
+                ✨ Dapatkan Rekomendasi / Tips
+            </button>
+            <div id="gemini-output" class="mt-6 text-left p-4 border border-green-200 dark:border-green-700 bg-green-50 dark:bg-gray-700 rounded-md hidden"></div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 bg-white" data-aos="fade-up" id="keunggulan">
+<div class="container mx-auto px-6">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold mb-4 text-gray-800">Keunggulan SahirinCare</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Alasan mengapa pelanggan memilih dan mempercayai layanan kami.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="feature-card bg-gray-50 p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">✨</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Berpengalaman</h3>
+<p class="text-gray-600 flex-grow">Lebih dari 20 tahun pengalaman dengan teknik pijat yang tepat, aman, dan efektif.</p>
+</div>
+<div class="feature-card bg-gray-50 p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">⏱️</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Layanan Fleksibel</h3>
+<p class="text-gray-600 flex-grow">Pemesanan praktis via WhatsApp untuk layanan panggilan atau kunjungan langsung.</p>
+</div>
+<div class="feature-card bg-gray-50 p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">🏡</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Panggilan ke Rumah</h3>
+<p class="text-gray-600 flex-grow">Home service profesional, tepat waktu, dan mematuhi protokol kesehatan.</p>
+</div>
+<div class="feature-card bg-gray-50 p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">👍</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Privasi Terjaga</h3>
+<p class="text-gray-600 flex-grow">Terapis kami beretika dan berkomitmen penuh menjaga privasi serta kenyamanan Anda.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">💰</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Harga Terjangkau</h3>
+<p class="text-gray-600 flex-grow">Kualitas layanan terbaik dengan harga yang tetap bersahabat untuk semua kalangan.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">🏅</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Pelanggan Setia</h3>
+<p class="text-gray-600 flex-grow">Kepercayaan dari pelanggan tetap dan ulasan positif menjadi bukti kualitas kami.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">🏆</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Bersertifikat Resmi</h3>
+<p class="text-gray-600 flex-grow">Memenuhi Standar Nasional layanan pijat tradisional. Kualitas dan keamanan terjamin.</p>
+</div>
+<div class="feature-card bg-white p-6 rounded-lg shadow-sm text-center flex flex-col h-full">
+<div class="text-5xl mb-4">🛌</div>
+<h3 class="text-xl font-semibold mb-2 text-gray-800">Kepuasan Utama</h3>
+<p class="text-gray-600 flex-grow">Layanan ramah, bersih, dan menyeluruh demi kenyamanan dan kepercayaan Anda.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 bg-gray-50" data-aos="fade-up" id="testimoni">
+<div class="container mx-auto px-6">
+<h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Apa Kata Pelanggan Kami?</h2>
+<div class="testimonial-carousel relative overflow-hidden">
+    <div class="testimonial-track flex transition-transform duration-500 ease-in-out">
+        <div class="testimonial-item-wrapper flex-shrink-0 w-full px-4">
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                <div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-gray-600 mb-4 italic">"Bapak Sahirin sangat profesional, saya merasa sangat rileks dan bugar setelah terapi! Layanan panggilannya juga sangat praktis."</p>
+                <cite class="font-semibold text-gray-700 not-italic">— Bu Nining, Depok</cite>
+            </div>
+        </div>
+        <div class="testimonial-item-wrapper flex-shrink-0 w-full px-4">
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                <div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-gray-600 mb-4 italic">"Pelayanan sangat memuaskan, rasanya tubuh lebih segar dan siap beraktivitas setelah pijat refleksi. Top!"</p>
+                <cite class="font-semibold text-gray-700 not-italic">— Pak Anwar, Cileungsi</cite>
+            </div>
+        </div>
+        <div class="testimonial-item-wrapper flex-shrink-0 w-full px-4">
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                <div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-gray-600 mb-4 italic">"Saya sering pegal karena kerja, SahirinCare jadi solusi terbaik. Nyeri punggung saya jauh berkurang. Terima kasih banyak!"</p>
+                <cite class="font-semibold text-gray-700 not-italic">— Bu Sari, Jatiasih</cite>
+            </div>
+        </div>
+        <div class="testimonial-item-wrapper flex-shrink-0 w-full px-4">
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                <div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-gray-600 mb-4 italic">"Tidur jadi lebih nyenyak dan badan rileks setelah diterapi. Recommended banget buat yang susah tidur karena badan kaku."</p>
+                <cite class="font-semibold text-gray-700 not-italic">— Bu Ika, Bekasi Utara</cite>
+            </div>
+		</div>
+        <div class="testimonial-item-wrapper flex-shrink-0 w-full px-4">
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                <div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-gray-600 mb-4 italic">"Pertama kali coba langsung terasa bedanya. Badan yang tadinya pegal total langsung enteng! Terapisnya sopan dan ahli."</p>
+                <cite class="font-semibold text-gray-700 not-italic">— Pak Hendra, Cikarang</cite>
+            </div>
+		</div>
+        <div class="testimonial-item-wrapper flex-shrink-0 w-full px-4">
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                <div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-gray-600 mb-4 italic">"Servis panggilan ke rumahnya sangat praktis dan cepat. Terapisnya datang tepat waktu, ramah, dan profesional."</p>
+                <cite class="font-semibold text-gray-700 not-italic">— Pak Deni, Babelan</cite>
+            </div>
+		</div>
+        <div class="testimonial-item-wrapper flex-shrink-0 w-full px-4">
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                <div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-gray-600 mb-4 italic">"Anak saya jadi lebih tenang dan tidak rewel setelah dipijat di sini. Terapisnya sabar banget menghadapi anak-anak."</p>
+                <cite class="font-semibold text-gray-700 not-italic">— Mbak Wulan, Tambun</cite>
+			</div>
+        </div>
+        <div class="testimonial-item-wrapper flex-shrink-0 w-full px-4">
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                <div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+                <p class="text-gray-600 mb-4 italic">"Udah coba banyak tempat pijat, tapi di SahirinCare beda. Habis pijat masuk angin di sini, badan langsung plong!"</p>
+                <cite class="font-semibold text-gray-700 not-italic">— Mas Rio, Rawalumbu</cite>
+            </div>
+        </div>
+    </div>
+    <button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full ml-2 z-10" id="prev-testimonial" aria-label="Previous testimonial">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full mr-2 z-10" id="next-testimonial" aria-label="Next testimonial">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+</div>
+</div>
+</section>
+
+<section class="py-20 bg-white" data-aos="fade-up" id="faq">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">Pertanyaan Umum (FAQ)</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Temukan jawaban atas pertanyaan yang sering diajukan tentang layanan SahirinCare.</p>
+        </div>
+        <div class="max-w-3xl mx-auto">
+            <div class="mb-4 border rounded-lg overflow-hidden"><div class="accordion-header p-5 flex justify-between items-center bg-white text-gray-800 font-semibold"><span>Bagaimana cara memesan layanan SahirinCare?</span><i class="fas fa-chevron-down transform transition-transform duration-300"></i></div><div class="accordion-content p-5 bg-gray-50 text-gray-700"><p>Anda dapat memesan layanan kami dengan mudah melalui WhatsApp di nomor <a href="https://wa.me/6287808788589" class="text-green-600 hover:underline">0878-0878-8589</a> atau mengisi formulir pemesanan di bagian bawah halaman ini.</p></div></div>
+            <div class="mb-4 border rounded-lg overflow-hidden"><div class="accordion-header p-5 flex justify-between items-center bg-white text-gray-800 font-semibold"><span>Apakah terapis datang langsung ke rumah pelanggan?</span><i class="fas fa-chevron-down transform transition-transform duration-300"></i></div><div class="accordion-content p-5 bg-gray-50 text-gray-700"><p>Ya, SahirinCare menyediakan layanan panggilan ke rumah (home service) untuk area Bekasi dan sekitarnya, memberikan kenyamanan maksimal bagi Anda.</p></div></div>
+            <div class="mb-4 border rounded-lg overflow-hidden"><div class="accordion-header p-5 flex justify-between items-center bg-white text-gray-800 font-semibold"><span>Berapa lama durasi setiap sesi pijat?</span><i class="fas fa-chevron-down transform transition-transform duration-300"></i></div><div class="accordion-content p-5 bg-gray-50 text-gray-700"><p>Durasi sesi pijat bervariasi tergantung jenis layanan yang dipilih. Umumnya, sesi pijat terapis atau refleksi berlangsung sekitar 60-90 menit.</p></div></div>
+            <div class="mb-4 border rounded-lg overflow-hidden"><div class="accordion-header p-5 flex justify-between items-center bg-white text-gray-800 font-semibold"><span>Apakah ada layanan pijat untuk anak-anak?</span><i class="fas fa-chevron-down transform transition-transform duration-300"></i></div><div class="accordion-content p-5 bg-gray-50 text-gray-700"><p>Tentu, kami memiliki paket khusus pijat anak-anak (minimal usia 4 tahun) dengan teknik yang lembut dan aman untuk menjaga kesehatan dan kenyamanan si kecil.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== GEMINI FEATURE: TIPS KESEHATAN (Bagian ini sekarang hanya menampilkan blog, AI dipindahkan ke bagian rekomendasi) ===== -->
+<section class="py-20 bg-gray-50" data-aos="fade-up" id="blog">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-3xl font-bold mb-4 text-gray-800">Edukasi &amp; Tips Sehat</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Dapatkan artikel dan tips praktis untuk menjaga kesehatan tubuh dan pikiran Anda.</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="blog-card bg-white rounded-lg shadow-md"><img alt="Manfaat Pijat Terapis" class="w-full h-48 object-cover" loading="lazy" src="image/image 9/image 9.jpg"/><div class="p-6"><h3 class="text-xl font-bold mb-2 text-gray-800">Manfaat Pijat Tradisional</h3><p class="text-gray-600 mb-4">Membahas berbagai manfaat pijat untuk tubuh, mental, dan sirkulasi darah.</p><a class="text-green-600 font-semibold hover:underline" href="#">Baca Selengkapnya</a></div></div>
+<div class="blog-card bg-white rounded-lg shadow-md"><img alt="Cara Mengatasi Pegal" class="w-full h-48 object-cover" src="image/image 10/image 10.jpg"/><div class="p-6"><h3 class="text-xl font-bold mb-2 text-gray-800">Cara Mengatasi Pegal Setelah Kerja</h3><p class="text-gray-600 mb-4">Tips dan teknik untuk meredakan nyeri punggung tanpa obat.</p><a class="text-green-600 font-semibold hover:underline" href="#">Baca Selengkapnya</a></div></div>
+<div class="blog-card bg-white rounded-lg shadow-md"><img alt="Waktu Terbaik untuk Pijat" class="w-full h-48 object-cover" loading="lazy" src="image/image 11/image 11.jpg"/><div class="p-6"><h3 class="text-xl font-bold mb-2 text-gray-800">Kapan Waktu Terbaik untuk Pijat?</h3><p class="text-gray-600 mb-4">Pentingnya merawat tubuh melalui pijat untuk kesehatan jangka panjang.</p><a class="text-green-600 font-semibold hover:underline" href="#">Baca Selengkapnya</a></div></div>
+</div>
+</div>
+</section>
+
+<section class="py-20 bg-white" data-aos="fade-up" id="contact">
+<form action="https://formspree.io/f/xblyvyrl" class="max-w-lg mx-auto bg-gray-50 p-8 rounded-lg shadow-md" id="my-form" method="POST">
+<h2 class="text-2xl font-bold mb-4 text-gray-800 text-center">Pesan Layanan Kami</h2>
+<p class="text-gray-600 text-center mb-6">Isi formulir di bawah ini atau hubungi kami via WhatsApp.</p>
+
+<div id="lokasi-info-booking" class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 text-left text-sm text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-600 mb-6">
+  <div id="lokasi-text">📍 Menentukan lokasi Anda...</div>
+  <button id="ulang-lokasi" type="button" onclick="SahirinCareApp.detectLocation()" class="mt-3 inline-flex items-center px-3 py-1 bg-green-600 text-white rounded-md text-xs hover:bg-green-700 transition">
+    🔄 Deteksi Ulang Lokasi
+  </button>
+</div>
+
+<input class="w-full p-3 mb-4 border rounded-md" name="Nama" placeholder="Nama Lengkap" required="" type="text"/>
+<input class="w-full p-3 mb-4 border rounded-md" name="Telepon" placeholder="Nomor Telepon" required="" type="tel"/>
+<select class="w-full p-3 mb-4 border rounded-md" name="Layanan" required="">
+<option value="">-- Pilih Layanan --</option>
+<option value="Pijat Tradisional">Pijat Tradisional</option>
+<option value="Pijat Refleksi">Pijat Refleksi</option>
+<option value="Pijat ke Rumah">Pijat ke Rumah</option>
+<option value="Pijat Masuk Angin">Pijat Masuk Angin</option>
+<option value="Terapis Nyeri Punggung">Terapis Nyeri Punggung</option>
+<option value="Pijat Anak-Anak">Pijat Anak-Anak</option>
+</select>
+<input class="w-full p-3 mb-4 border rounded-md" name="Jadwal" type="datetime-local"/>
+<textarea class="w-full p-3 mb-4 border rounded-md" name="Pesan" placeholder="Pesan Tambahan (contoh: alamat lengkap)" rows="4"></textarea>
+<button class="w-full py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 transition" id="my-form-button" type="submit"><i class="fas fa-paper-plane mr-2"></i> Kirim Pesanan</button>
+<p class="text-center mt-4 font-semibold text-green-600" id="my-form-status"></p>
+</form>
+</section>
+
+<!-- ===== BAGIAN LOGIN ADMIN YANG SUDAH DIREVISI TOTAL ===== -->
+<footer class="bg-gray-800">
+<section class="py-20 bg-gray-100 dark:bg-gray-900" id="admin-login">
+  <div class="container mx-auto px-6 max-w-md">
+    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg transition-all duration-300">
+      <div class="text-center mb-8">
+        <a href="#home" class="font-semibold text-gray-800 dark:text-white text-3xl">Sahirin<span class="text-green-600">Care</span></a>
+        <h2 class="text-2xl font-bold mt-2 text-gray-700 dark:text-gray-200">Admin Dashboard Login</h2>
+        <p class="text-gray-500 dark:text-gray-400 mt-1">Silakan masuk untuk melanjutkan.</p>
+      </div>
+
+      <form id="admin-login-form" class="space-y-6">
+        <div>
+          <label for="admin-username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-user text-gray-400"></i>
+            </div>
+            <input type="text" id="admin-username" placeholder="Masukkan username" class="w-full pl-10 p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent transition" required>
+          </div>
+        </div>
+
+        <div>
+          <label for="admin-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-lock text-gray-400"></i>
+            </div>
+            <input type="password" id="admin-password" placeholder="Masukkan password" class="w-full pl-10 p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent transition" required>
+            <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Toggle password visibility">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 transition-all duration-300 transform hover:scale-105">
+            <i class="fas fa-sign-in-alt mr-2"></i> Masuk
+        </button>
+      </form>
+      <p id="login-status" class="mt-4 text-center text-sm font-medium hidden"></p>
+    </div>
+     <p class="text-center mt-6 text-sm text-gray-500 dark:text-gray-400">Hanya untuk administrator SahirinCare.</p>
+  </div>
+</section>
+
+<div class="py-6 bg-gray-800">
+    <div class="container mx-auto px-6 text-center">
+        <p class="text-white">© 2024 SahirinCare. All rights reserved.</p>
+        <div class="flex justify-center space-x-4 mt-2">
+            <a class="text-white hover:text-green-400" href="#">Facebook</a>
+            <a class="text-white hover:text-green-400" href="#">Instagram</a>
+            <a class="text-white hover:text-green-400" href="https://wa.me/6287808788589" target="_blank">WhatsApp</a>
+        </div>
+    </div>
+</div>
+</footer>
+
+<button id="back-to-top" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
+
+<!-- Modal for Loading/Result -->
+<div id="gemini-modal" class="modal-overlay">
+    <div class="modal-content">
+        <div id="modal-loader" class="hidden">
+            <div class="loader-spinner"></div>
+            <p class="mt-4 text-gray-600 dark:text-gray-300">AI sedang berpikir...</p>
+        </div>
+        <div id="modal-error" class="hidden">
+            <h3 class="text-xl font-bold text-red-500 mb-2">Terjadi Kesalahan</h3>
+            <p id="modal-error-message" class="text-gray-600 dark:text-gray-300"></p>
+            <button id="close-modal-btn" class="mt-4 px-6 py-2 bg-red-500 text-white rounded-md">Tutup</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+// Namespace untuk semua fungsi JavaScript aplikasi
+const SahirinCareApp = (() => {
+    // Konfigurasi
+    const CONFIG = {
+        GEMINI_API_KEY: "YOUR_GEMINI_API_KEY_HERE", // GANTI DENGAN API KEY ANDA!
+        ADMIN_USERNAME: "admin",
+        ADMIN_PASSWORD: "admin123",
+        WHATSAPP_NUMBER: "6287808788589",
+        SAHIRINCARE_LAT: -6.370217455605747,
+        SAHIRINCARE_LON: 107.09926462392487
+    };
+
+    // Elemen DOM
+    const DOM = {
+        mobileMenuButton: document.getElementById('mobile-menu-button'),
+        mobileMenu: document.getElementById('mobile-menu'),
+        hamburgerToggleDesktop: document.getElementById('hamburger-toggle-desktop'),
+        hamburgerMenuDesktop: document.getElementById('hamburger-menu-desktop'),
+        mobileLangToggle: document.getElementById('mobile-lang-toggle'),
+        mobileLangMenu: document.getElementById('mobile-lang-menu'),
+        loader: document.getElementById('loader'),
+        backToTopButton: document.getElementById('back-to-top'),
+        darkToggleDesktop: document.getElementById('darkToggleDesktop'),
+        darkToggleMobile: document.getElementById('darkToggleMobile'),
+        filterButtons: document.querySelectorAll('#service-filters .filter-button'),
+        serviceCards: document.querySelectorAll('#service-list .service-card'),
+        accordionHeaders: document.querySelectorAll('.accordion-header'),
+        contactForm: document.getElementById("my-form"),
+        contactFormButton: document.getElementById("my-form-button"),
+        contactFormStatus: document.getElementById("my-form-status"),
+        adminLoginForm: document.getElementById("admin-login-form"),
+        adminUsernameInput: document.getElementById("admin-username"),
+        adminPasswordInput: document.getElementById("admin-password"),
+        togglePasswordButton: document.getElementById("toggle-password"),
+        loginStatus: document.getElementById("login-status"),
+        geminiModal: document.getElementById('gemini-modal'),
+        modalLoader: document.getElementById('modal-loader'),
+        modalError: document.getElementById('modal-error'),
+        modalErrorMessage: document.getElementById('modal-error-message'),
+        closeModalBtn: document.getElementById('close-modal-btn'),
+        geminiInput: document.getElementById('gemini-input'),
+        getGeminiResponseBtn: document.getElementById('get-gemini-response-btn'),
+        geminiOutput: document.getElementById('gemini-output'),
+        testimonialTrack: document.querySelector('.testimonial-track'),
+        testimonialItems: document.querySelectorAll('.testimonial-item-wrapper'),
+        prevTestimonialBtn: document.getElementById('prev-testimonial'),
+        nextTestimonialBtn: document.getElementById('next-testimonial'),
+        lokasiInfoBooking: document.getElementById("lokasi-info-booking"),
+        lokasiText: document.getElementById("lokasi-text"),
+        ulangLokasiBtn: document.getElementById("ulang-lokasi")
+    };
+
+    let testimonialCurrentIndex = 0;
+    let testimonialIntervalId;
+
+    // --- Helper Functions ---
+    const applyDarkMode = (enabled) => {
+        document.body.classList.toggle('dark-mode', enabled);
+        if(DOM.darkToggleDesktop) DOM.darkToggleDesktop.checked = enabled;
+        if(DOM.darkToggleMobile) DOM.darkToggleMobile.checked = enabled;
+        localStorage.setItem('darkMode', enabled ? 'enabled' : 'disabled');
+    };
+
+    const showModal = (type, message = '') => {
+        DOM.geminiModal.classList.add('show');
+        if (type === 'loading') {
+            DOM.modalLoader.style.display = 'block';
+            DOM.modalError.style.display = 'none';
+        } else if (type === 'error') {
+            DOM.modalLoader.style.display = 'block'; // Tampilkan loader juga untuk konsistensi
+            DOM.modalError.style.display = 'block';
+            DOM.modalErrorMessage.textContent = message;
+        }
+    };
+
+    const hideModal = () => {
+        DOM.geminiModal.classList.remove('show');
+        DOM.modalLoader.style.display = 'none';
+        DOM.modalError.style.display = 'none';
+    };
+
+    const getDistance = (lat1, lon1, lat2, lon2) => {
+        const R = 6371;
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                  Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+    };
+
+    const getLangName = (langCode) => {
+        const langMap = {
+            'en': 'english', 'ar': 'arabic', 'ja': 'japanese', 'fr': 'french',
+            'de': 'german', 'zh-CN': 'chinese', 'ko': 'korean', 'hi': 'hindi', 'id': 'indonesian'
+        };
+        return langMap[langCode] || langCode;
+    };
+
+    // --- Core Functions ---
+
+    const initLoader = () => {
+        if (DOM.loader) DOM.loader.style.display = 'none';
+    };
+
+    const initMobileMenu = () => {
+        DOM.mobileMenuButton?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            DOM.mobileMenu.classList.toggle('active');
+        });
+        DOM.hamburgerToggleDesktop?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            DOM.hamburgerMenuDesktop.classList.toggle('hidden');
+        });
+        DOM.mobileLangToggle?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            DOM.mobileLangMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', (e) => {
+            if (DOM.mobileMenu && !DOM.mobileMenu.contains(e.target) && !DOM.mobileMenuButton.contains(e.target)) {
+                DOM.mobileMenu.classList.remove('active');
+            }
+            if (DOM.hamburgerMenuDesktop && !DOM.hamburgerMenuDesktop.contains(e.target) && !DOM.hamburgerToggleDesktop.contains(e.target)) {
+                DOM.hamburgerMenuDesktop.classList.add('hidden');
+            }
+            if (DOM.mobileLangMenu && !DOM.mobileLangMenu.contains(e.target) && !DOM.mobileLangToggle.contains(e.target)) {
+                DOM.mobileLangMenu.classList.add('hidden');
+            }
+        });
+    };
+
+    const closeLangMenu = () => {
+        DOM.mobileLangMenu.classList.add('hidden');
+    };
+
+    const initScrollEvents = () => {
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+
+            if (DOM.backToTopButton) {
+                scrollTop > 300 ? DOM.backToTopButton.classList.add('show') : DOM.backToTopButton.classList.remove('show');
+            }
+        });
+        DOM.backToTopButton?.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    };
+
+    const initAOS = () => {
+        AOS.init({ once: true, duration: 800 });
+    };
+
+    const initDarkMode = () => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedMode = localStorage.getItem('darkMode');
+
+        if (savedMode === 'enabled' || (savedMode === null && prefersDark)) {
+            applyDarkMode(true);
+        } else {
+            applyDarkMode(false);
+        }
+
+        DOM.darkToggleDesktop?.addEventListener('change', () => applyDarkMode(DOM.darkToggleDesktop.checked));
+        DOM.darkToggleMobile?.addEventListener('change', () => applyDarkMode(DOM.darkToggleMobile.checked));
+
+        // Apply dark mode based on time of day if no saved preference
+        if (savedMode === null) {
+            const now = new Date();
+            const hour = now.getHours();
+            const isNight = hour >= 18 || hour < 6;
+            if (isNight) {
+                applyDarkMode(true);
+            }
+        }
+    };
+
+    const initServiceFilters = () => {
+        DOM.filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                DOM.filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.dataset.filter;
+                DOM.serviceCards.forEach(card => {
+                    card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'flex' : 'none';
+                });
+            });
+        });
+    };
+
+    const initAccordion = () => {
+        DOM.accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('i');
+                const isActive = content.classList.contains('active');
+                DOM.accordionHeaders.forEach(h => { // Close others
+                    const c = h.nextElementSibling;
+                    const i = h.querySelector('i');
+                    c.classList.remove('active');
+                    c.style.maxHeight = null;
+                    i.classList.remove('fa-chevron-up');
+                    i.classList.add('fa-chevron-down');
+                });
+                if (!isActive) { // Open clicked one
+                    content.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+    };
+
+    const initContactForm = () => {
+        DOM.contactForm?.addEventListener("submit", async function handleSubmit(event) {
+            event.preventDefault();
+            DOM.contactFormStatus.textContent = "";
+            DOM.contactFormButton.disabled = true;
+            DOM.contactFormButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mengirim...';
+
+            const data = new FormData(event.target);
+            try {
+                const response = await fetch(event.target.action, {
+                    method: DOM.contactForm.method,
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    DOM.contactFormStatus.innerHTML = "✅ Pesanan Anda berhasil dikirim!";
+                    DOM.contactForm.reset();
+                } else {
+                    const errorData = await response.json();
+                    DOM.contactFormStatus.innerHTML = errorData.errors ? errorData.errors.map(e => e.message).join(", ") : "❌ Terjadi kesalahan saat mengirim pesanan.";
+                }
+            } catch (error) {
+                console.error("Formspree submission error:", error);
+                DOM.contactFormStatus.innerHTML = "❌ Terjadi kesalahan koneksi.";
+            } finally {
+                DOM.contactFormButton.disabled = false;
+                DOM.contactFormButton.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Kirim Pesanan';
+            }
+        });
+    };
+
+    const initAdminLogin = () => {
+        DOM.adminLoginForm?.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const username = DOM.adminUsernameInput.value.trim();
+            const password = DOM.adminPasswordInput.value.trim();
+
+            DOM.loginStatus.classList.remove("text-red-600", "text-green-600");
+            DOM.loginStatus.textContent = "Mencoba masuk...";
+            DOM.loginStatus.className = "mt-4 text-center text-sm font-medium text-yellow-500 block";
+
+            setTimeout(() => {
+                if (username === CONFIG.ADMIN_USERNAME && password === CONFIG.ADMIN_PASSWORD) {
+                    DOM.loginStatus.textContent = "✅ Login berhasil! Mengarahkan...";
+                    DOM.loginStatus.className = "mt-4 text-center text-sm font-medium text-green-600 block";
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html'; // Ganti dengan path dashboard yang benar
+                    }, 1000);
+
+                } else {
+                    DOM.loginStatus.textContent = "❌ Username atau password salah. Coba lagi.";
+                    DOM.loginStatus.className = "mt-4 text-center text-sm font-medium text-red-600 block";
+                    const formContainer = document.querySelector("#admin-login .bg-white");
+                    formContainer.classList.add('animate-shake');
+                    setTimeout(() => formContainer.classList.remove('animate-shake'), 500);
+                }
+            }, 1000);
+        });
+
+        DOM.togglePasswordButton?.addEventListener('click', function() {
+            const isPassword = DOM.adminPasswordInput.type === 'password';
+            DOM.adminPasswordInput.type = isPassword ? 'text' : 'password';
+            this.querySelector('i').classList.toggle('fa-eye', !isPassword);
+            this.querySelector('i').classList.toggle('fa-eye-slash', isPassword);
+        });
+    };
+
+    const callGeminiApi = async (prompt) => {
+        showModal('loading');
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${CONFIG.GEMINI_API_KEY}`;
+        
+        const payload = {
+            contents: [{
+                role: "user",
+                parts: [{ text: prompt }]
+            }]
+        };
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || 'Gagal berkomunikasi dengan API.');
+            }
+
+            const result = await response.json();
+            
+            hideModal();
+            if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content.parts.length > 0) {
+                return result.candidates[0].content.parts[0].text;
+            } else {
+                throw new Error('Respons dari API tidak valid atau kosong.');
+            }
+        } catch (error) {
+            showModal('error', error.message);
+            console.error("Gemini API Error:", error);
+            return null;
+        }
+    };
+
+    const initGeminiFeature = () => {
+        DOM.closeModalBtn.addEventListener('click', hideModal);
+
+        DOM.getGeminiResponseBtn.addEventListener('click', async () => {
+            const query = DOM.geminiInput.value.trim();
+            if (!query) {
+                showModal('error', 'Mohon isi pertanyaan atau keluhan Anda terlebih dahulu.');
+                return;
+            }
+
+            let prompt;
+            if (query.toLowerCase().includes("pundak") || query.toLowerCase().includes("kepala") || 
+                query.toLowerCase().includes("pegal") || query.toLowerCase().includes("nyeri") ||
+                query.toLowerCase().includes("layanan") || query.toLowerCase().includes("pijat")) {
+                prompt = `Anda adalah seorang terapis ahli dari SahirinCare. Berdasarkan keluhan pelanggan berikut: "${query}", rekomendasikan satu layanan yang paling cocok dari daftar ini: Pijat Terapis, Pijat Refleksi, Pijat Masuk Angin, Terapis Nyeri Punggung, Pijat Anak-Anak, Pijat ke Rumah. Berikan nama layanan yang direkomendasikan dalam format tebal (**Nama Layanan**), diikuti dengan penjelasan singkat mengapa layanan tersebut cocok. Tambahkan juga ajakan untuk booking.`;
+            } else {
+                prompt = `Sebagai seorang ahli kesehatan untuk SahirinCare, berikan 3 tips kesehatan yang praktis dan mudah diikuti terkait topik: "${query}". Sajikan dalam format daftar bernomor.`;
+            }
+            
+            const resultText = await callGeminiApi(prompt);
+            
+            if (resultText) {
+                DOM.geminiOutput.textContent = resultText; 
+                DOM.geminiOutput.innerHTML = DOM.geminiOutput.innerHTML.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                DOM.geminiOutput.classList.remove('hidden');
+            }
+        });
+    };
+
+    const updateTestimonialCarousel = () => {
+        if (DOM.testimonialItems.length === 0 || !DOM.testimonialTrack) return;
+        // Calculate item width including any horizontal padding/margin from CSS
+        // For w-full and px-4, the actual content width is (container_width - 2*1rem)
+        // But for translateX, we need the full width of the flex item.
+        const itemWidth = DOM.testimonialItems[0].offsetWidth; 
+        DOM.testimonialTrack.style.transform = `translateX(-${testimonialCurrentIndex * itemWidth}px)`;
+    };
+
+    const startTestimonialAutoSlide = () => {
+        if (DOM.testimonialItems.length > 1) { // Only auto-slide if more than one testimonial
+            testimonialIntervalId = setInterval(() => {
+                testimonialCurrentIndex = (testimonialCurrentIndex + 1) % DOM.testimonialItems.length;
+                updateTestimonialCarousel();
+            }, 5000);
+        }
+    };
+
+    const stopTestimonialAutoSlide = () => {
+        clearInterval(testimonialIntervalId);
+    };
+
+    const initTestimonialCarousel = () => {
+        if (DOM.testimonialItems.length <= 1) { // Hide buttons if 0 or 1 testimonial
+            if (DOM.prevTestimonialBtn) DOM.prevTestimonialBtn.style.display = 'none';
+            if (DOM.nextTestimonialBtn) DOM.nextTestimonialBtn.style.display = 'none';
+            return; // No need for carousel logic if only one item
+        }
+
+        updateTestimonialCarousel();
+        startTestimonialAutoSlide();
+
+        DOM.prevTestimonialBtn?.addEventListener('click', () => {
+            stopTestimonialAutoSlide();
+            testimonialCurrentIndex = (testimonialCurrentIndex - 1 + DOM.testimonialItems.length) % DOM.testimonialItems.length;
+            updateTestimonialCarousel();
+            startTestimonialAutoSlide();
+        });
+
+        DOM.nextTestimonialBtn?.addEventListener('click', () => {
+            stopTestimonialAutoSlide();
+            testimonialCurrentIndex = (testimonialCurrentIndex + 1) % DOM.testimonialItems.length;
+            updateTestimonialCarousel();
+            startTestimonialAutoSlide();
+        });
+
+        window.addEventListener('resize', () => {
+            updateTestimonialCarousel(); // Recalculate on resize
+            stopTestimonialAutoSlide(); // Stop and restart to prevent issues during resize
+            startTestimonialAutoSlide();
+        });
+    };
+
+    const detectLocation = async () => {
+        if (DOM.lokasiInfoBooking) DOM.lokasiInfoBooking.classList.remove("hidden"); 
+        if (DOM.lokasiText) DOM.lokasiText.textContent = "📍 Menentukan lokasi Anda...";
+
+        if (!navigator.geolocation) {
+            if (DOM.lokasiText) DOM.lokasiText.textContent = "Geolocation tidak didukung browser Anda.";
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            const distance = getDistance(lat, lon, CONFIG.SAHIRINCARE_LAT, CONFIG.SAHIRINCARE_LON) * 1.15; // Estimasi jarak + 15%
+
+            try {
+                const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+                const data = await res.json();
+                const place = data.address.village || data.address.suburb || data.address.town || data.address.city || data.display_name;
+                if (DOM.lokasiText) DOM.lokasiText.innerHTML = `📍 Lokasi Anda: <strong>${place}</strong><br>🚗 Estimasi jarak: <strong>${distance.toFixed(1)} km</strong> ke SahirinCare`;
+            } catch (err) {
+                console.error("Reverse geocoding error:", err);
+                if (DOM.lokasiText) DOM.lokasiText.innerHTML = `📍 Koordinat Anda terdeteksi.<br>🚗 Estimasi jarak: <strong>${distance.toFixed(1)} km</strong> ke SahirinCare`;
+            }
+        }, (err) => {
+            console.error("Geolocation error:", err);
+            let errorMessage = "Gagal mendeteksi lokasi.";
+            if (err.code === err.PERMISSION_DENIED) {
+                errorMessage = "Izin lokasi ditolak. Mohon izinkan akses lokasi di pengaturan browser Anda.";
+            } else if (err.code === err.POSITION_UNAVAILABLE) {
+                errorMessage = "Informasi lokasi tidak tersedia.";
+            } else if (err.code === err.TIMEOUT) {
+                errorMessage = "Waktu deteksi lokasi habis.";
+            }
+            if (DOM.lokasiText) DOM.lokasiText.textContent = errorMessage;
+        }, {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        });
+    };
+
+    const initGoogleTranslate = () => {
+        // Fungsi ini akan dipanggil oleh Google Translate API
+        window.googleTranslateElementInit = () => {
+            new google.translate.TranslateElement({
+                pageLanguage: 'id',
+                includedLanguages: 'id,en,ar,ja,fr,de,zh-CN,ko,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        };
+
+        // Memuat skrip Google Translate secara dinamis
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        document.body.appendChild(script);
+    };
+
+    const translateLanguage = (lang) => {
+        const $frame = document.querySelector('.goog-te-menu-frame');
+        if (!$frame) {
+            // Jika frame belum dimuat, coba lagi setelah jeda
+            setTimeout(() => translateLanguage(lang), 500);
+            return;
+        }
+        
+        const langElements = $frame.contentWindow.document.querySelectorAll('.goog-te-menu2-item span.text');
+        for (let i = 0; i < langElements.length; i++) {
+            const el = langElements[i];
+            if (el.innerText.toLowerCase().includes(getLangName(lang))) {
+                el.click();
+                return;
+            }
+        }
+    };
+
+    // Public API
+    return {
+        init: () => {
+            initLoader();
+            initMobileMenu();
+            initScrollEvents();
+            initAOS();
+            initDarkMode();
+            initServiceFilters();
+            initAccordion();
+            initContactForm();
+            initAdminLogin();
+            initGeminiFeature();
+            initTestimonialCarousel();
+            detectLocation(); // Initial location detection
+            initGoogleTranslate();
+        },
+        closeLangMenu: closeLangMenu, // Expose for inline onclick
+        translateLanguage: translateLanguage, // Expose for inline onclick
+        detectLocation: detectLocation // Expose for inline onclick
+    };
+})();
+
+document.addEventListener('DOMContentLoaded', SahirinCareApp.init);
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').then(function (reg) {
+      console.log('ServiceWorker terdaftar: ', reg.scope);
+    }).catch(function (err) {
+      console.log('ServiceWorker gagal:', err);
+    });
+  });
+}
+</script>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
