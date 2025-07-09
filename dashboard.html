@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Admin Dashboard - SahirinCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body class="bg-gray-100">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="sidebar w-64 bg-white text-gray-800 flex flex-col p-4 space-y-2 fixed h-full lg:relative lg:translate-x-0 transform -translate-x-full transition-transform duration-200 ease-in-out z-30">
+            <div class="text-2xl font-bold text-center py-4">
+                <a href="index_revised (1).html">Sahirin<span class="text-green-500">Care</span></a>
+            </div>
+            <nav class="flex-grow">
+                <ul>
+                    <li><a href="#dashboard" class="sidebar-link active flex items-center py-3 px-4 rounded-lg"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a></li>
+                    <li><a href="#pesanan" class="sidebar-link flex items-center py-3 px-4 rounded-lg"><i class="fas fa-receipt w-6 mr-2"></i> Manajemen Pesanan</a></li>
+                    <li><a href="#layanan" class="sidebar-link flex items-center py-3 px-4 rounded-lg"><i class="fas fa-spa w-6 mr-2"></i> Manajemen Layanan</a></li>
+                    <li><a href="#blog" class="sidebar-link flex items-center py-3 px-4 rounded-lg"><i class="fas fa-newspaper w-6 mr-2"></i> Manajemen Blog</a></li>
+                    <li><a href="#pengaturan" class="sidebar-link flex items-center py-3 px-4 rounded-lg"><i class="fas fa-cog w-6 mr-2"></i> Pengaturan</a></li>
+                </ul>
+            </nav>
+            <div class="pt-4 border-t border-gray-200">
+                <a href="index_revised (1).html" class="sidebar-link flex items-center py-3 px-4 rounded-lg"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Header -->
+            <header class="bg-white shadow-md p-4 flex justify-between items-center z-20">
+                 <button id="menu-toggle" class="lg:hidden text-gray-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <h1 id="page-title" class="text-2xl font-bold text-gray-800">Dashboard</h1>
+                <div class="flex items-center space-x-4">
+                    <button id="dark-mode-toggle" class="text-gray-600"><i class="fas fa-moon"></i></button>
+                    <div class="relative">
+                        <img src="https://placehold.co/40x40/4CAF50/ffffff?text=A" alt="Admin" class="w-10 h-10 rounded-full cursor-pointer">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <main class="flex-1 p-6 lg:p-8 overflow-y-auto">
+                <!-- Dashboard Content -->
+                <div id="dashboard" class="content-section">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="stat-card bg-white p-6 rounded-lg shadow-md flex items-center">
+                            <i class="fas fa-wallet text-3xl text-blue-500 bg-blue-100 p-4 rounded-full"></i>
+                            <div class="ml-4">
+                                <p class="text-gray-600">Pendapatan Bulan Ini</p>
+                                <p class="text-2xl font-bold">Rp 2.550.000</p>
+                            </div>
+                        </div>
+                        <div class="stat-card bg-white p-6 rounded-lg shadow-md flex items-center">
+                            <i class="fas fa-receipt text-3xl text-green-500 bg-green-100 p-4 rounded-full"></i>
+                            <div class="ml-4">
+                                <p class="text-gray-600">Total Pesanan</p>
+                                <p class="text-2xl font-bold">25</p>
+                            </div>
+                        </div>
+                        <div class="stat-card bg-white p-6 rounded-lg shadow-md flex items-center">
+                            <i class="fas fa-users text-3xl text-yellow-500 bg-yellow-100 p-4 rounded-full"></i>
+                            <div class="ml-4">
+                                <p class="text-gray-600">Pelanggan Baru</p>
+                                <p class="text-2xl font-bold">8</p>
+                            </div>
+                        </div>
+                        <div class="stat-card bg-white p-6 rounded-lg shadow-md flex items-center">
+                            <i class="fas fa-star text-3xl text-red-500 bg-red-100 p-4 rounded-full"></i>
+                            <div class="ml-4">
+                                <p class="text-gray-600">Rating Rata-rata</p>
+                                <p class="text-2xl font-bold">4.9</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-4">Grafik Pendapatan (6 Bulan Terakhir)</h3>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Manajemen Pesanan Content -->
+                <div id="pesanan" class="content-section hidden">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-4">Daftar Pesanan</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-200">
+                                    <tr>
+                                        <th class="p-3">ID</th>
+                                        <th class="p-3">Pelanggan</th>
+                                        <th class="p-3">Layanan</th>
+                                        <th class="p-3">Jadwal</th>
+                                        <th class="p-3">Status</th>
+                                        <th class="p-3">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b">
+                                        <td class="p-3">001</td>
+                                        <td class="p-3">Budi Santoso</td>
+                                        <td class="p-3">Pijat Terapis</td>
+                                        <td class="p-3">08-07-2024 10:00</td>
+                                        <td class="p-3"><span class="bg-green-200 text-green-800 px-2 py-1 rounded-full text-sm">Selesai</span></td>
+                                        <td class="p-3"><button class="text-blue-500 hover:underline">Detail</button></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-3">002</td>
+                                        <td class="p-3">Siti Aminah</td>
+                                        <td class="p-3">Pijat Refleksi</td>
+                                        <td class="p-3">09-07-2024 14:00</td>
+                                        <td class="p-3"><span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full text-sm">Terjadwal</span></td>
+                                        <td class="p-3"><button class="text-blue-500 hover:underline">Detail</button></td>
+                                    </tr>
+                                     <tr class="border-b">
+                                        <td class="p-3">003</td>
+                                        <td class="p-3">Ahmad Dahlan</td>
+                                        <td class="p-3">Pijat Masuk Angin</td>
+                                        <td class="p-3">07-07-2024 19:00</td>
+                                        <td class="p-3"><span class="bg-red-200 text-red-800 px-2 py-1 rounded-full text-sm">Dibatalkan</span></td>
+                                        <td class="p-3"><button class="text-blue-500 hover:underline">Detail</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manajemen Layanan Content -->
+                <div id="layanan" class="content-section hidden">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Daftar Layanan</h3>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Tambah Layanan</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-200">
+                                    <tr>
+                                        <th class="p-3">Nama Layanan</th>
+                                        <th class="p-3">Kategori</th>
+                                        <th class="p-3">Harga</th>
+                                        <th class="p-3">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b">
+                                        <td class="p-3">Pijat Terapis</td>
+                                        <td class="p-3">Pijat Terapis</td>
+                                        <td class="p-3">Rp 80.000</td>
+                                        <td class="p-3"><button class="text-blue-500 hover:underline mr-2">Edit</button><button class="text-red-500 hover:underline">Hapus</button></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-3">Pijat Refleksi</td>
+                                        <td class="p-3">Pijat Refleksi</td>
+                                        <td class="p-3">Rp 80.000</td>
+                                        <td class="p-3"><button class="text-blue-500 hover:underline mr-2">Edit</button><button class="text-red-500 hover:underline">Hapus</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Manajemen Blog Content -->
+                 <div id="blog" class="content-section hidden">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Daftar Artikel Blog</h3>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Tambah Artikel</button>
+                        </div>
+                         <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-200">
+                                    <tr>
+                                        <th class="p-3">Judul Artikel</th>
+                                        <th class="p-3">Tanggal Publikasi</th>
+                                        <th class="p-3">Status</th>
+                                        <th class="p-3">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b">
+                                        <td class="p-3">Manfaat Pijat Tradisional</td>
+                                        <td class="p-3">20-07-2024</td>
+                                        <td class="p-3"><span class="text-green-600">Dipublikasikan</span></td>
+                                        <td class="p-3"><button class="text-blue-500 hover:underline mr-2">Edit</button><button class="text-red-500 hover:underline">Hapus</button></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-3">Cara Mengatasi Pegal Setelah Kerja</td>
+                                        <td class="p-3">15-07-2024</td>
+                                        <td class="p-3"><span class="text-green-600">Dipublikasikan</span></td>
+                                        <td class="p-3"><button class="text-blue-500 hover:underline mr-2">Edit</button><button class="text-red-500 hover:underline">Hapus</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengaturan Content -->
+                <div id="pengaturan" class="content-section hidden">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-6">Pengaturan Situs</h3>
+                        <form class="space-y-6">
+                            <div>
+                                <label for="siteName" class="block text-sm font-medium text-gray-700">Nama Website</label>
+                                <input type="text" id="siteName" value="SahirinCare" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500">
+                            </div>
+                            <div>
+                                <label for="contactEmail" class="block text-sm font-medium text-gray-700">Email Kontak</label>
+                                <input type="email" id="contactEmail" value="info@sahirin.care" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500">
+                            </div>
+                            <div>
+                                <label for="contactPhone" class="block text-sm font-medium text-gray-700">Nomor Telepon (WhatsApp)</label>
+                                <input type="tel" id="contactPhone" value="087808788589" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500">
+                            </div>
+                            <div class="pt-4">
+                                <button type="submit" class="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Simpan Perubahan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
